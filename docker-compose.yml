@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  n8n:
+    image: my-n8n-with-python # Sử dụng tên image bạn vừa build
+    restart: always
+    ports:
+      - "5678:5678"
+    environment:
+      # Các biến môi trường n8n và database
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=n8n_db
+      - DB_POSTGRESDB_USER=nghiemns
+      - DB_POSTGRESDB_PASSWORD=1579
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=nghiemns
+      - N8N_BASIC_AUTH_PASSWORD=1579
+      - N8N_PROTOCOL=https
+      - N8N_HOST=your_n8n_domain.com
+      - WEBHOOK_URL=https://homen8n.digithub.io.vn/
+      - NODE_ENV=production
+    volumes:
+      - ./n8n_data:/home/node/.n8n
+      - ./scripts:/usr/src/app/scripts
+      # Nếu các script Python của bạn cần đọc/ghi file từ các thư mục khác, bạn có thể thêm volume ở đây
+    depends_on:
+      - postgres
+    networks:
+      - n8n_network
+
+  postgres:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=n8n_db
+      - POSTGRES_USER=n8n_user
+      - POSTGRES_PASSWORD=your_secure_db_password
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - n8n_network
+
+networks:
+  n8n_network:
+    driver: bridge

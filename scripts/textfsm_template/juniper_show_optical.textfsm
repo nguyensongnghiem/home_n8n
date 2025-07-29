@@ -1,0 +1,11 @@
+Value Interface (\S+)
+Value Tx_Power_dBm ([-]?\d+\.\d+)
+Value Temperature_C (\d+)
+Value Rx_Power_dBm ([-]?\d+\.\d+)
+
+Start
+  ^Physical interface:\s+${Interface}
+  ^\s+Laser output power\s+:\s+[\d\.]+\s+mW\s+\/\s+(${Tx_Power_dBm})
+  ^\s+Module temperature\s+:\s+(${Temperature_C})\s+degrees C  
+  ^\s+Laser receiver power\s+:\s+[\d\.]+\s+mW\s+\/\s+(${Rx_Power_dBm}) -> Record
+

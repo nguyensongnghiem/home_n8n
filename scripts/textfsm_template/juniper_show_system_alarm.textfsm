@@ -1,0 +1,12 @@
+Value ALARM_TIME (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} UTC)
+Value CLASS (\S+)
+Value DESCRIPTION (.+)
+
+Start
+  ^\d+\s+alarms\s+currently\s+active -> Header
+
+Header
+  ^Alarm time\s+Class\s+Description -> RecordStart
+
+RecordStart
+  ^${ALARM_TIME}\s+${CLASS}\s+${DESCRIPTION} -> Record

@@ -1,0 +1,9 @@
+Value ITEM (.*?)
+Value VERSION (REV.*?)
+Value PART_NUMBER (.*?)
+Value SERIAL_NUMBER (\S+)
+Value DESCRIPTION (.*)
+
+Start
+  ^Item\s+Version\s+Part number\s+Serial number\s+Description
+  ^\s*${ITEM}([ ]{2,}${VERSION})?([ ]{2,}${PART_NUMBER})?[ ]{2,}${SERIAL_NUMBER}[ ]{2,}${DESCRIPTION} -> Record

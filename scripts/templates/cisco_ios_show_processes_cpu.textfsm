@@ -1,0 +1,7 @@
+Value Cpu5SecUser (\S+)
+Value Cpu5SecKernel (\S+)
+Value Cpu1Min (\S+)
+Value Cpu5Min (\S+)
+
+Start
+  ^CPU utilization for five seconds: ${Cpu5SecUser}/${Cpu5SecKernel}; one minute: ${Cpu1Min}; five minutes: ${Cpu5Min} -> Record

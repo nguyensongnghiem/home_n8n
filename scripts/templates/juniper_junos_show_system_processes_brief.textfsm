@@ -1,0 +1,25 @@
+Value LastPid (\d+)
+Value Load1 ([\d.]+)
+Value Load5 ([\d.]+)
+Value Load15 ([\d.]+)
+Value UptimeDays (\d+)
+Value UptimeHMS (\d+:\d+:\d+)
+Value Time (\d+:\d+:\d+)
+Value Processes (\d+)
+Value Running (\d+)
+Value Sleeping (\d+)
+Value Waiting (\d+)
+Value MemActive (\d+M)
+Value MemInact (\d+M)
+Value MemWired (\d+M)
+Value MemCache (\d+M)
+Value MemBuf (\d+M)
+Value MemFree (\d+M)
+Value SwapTotal (\d+M)
+Value SwapFree (\d+M)
+
+Start
+  ^last pid: ${LastPid};\s+load averages:\s+${Load1},\s+${Load5},\s+${Load15}\s+up ${UptimeDays}\+${UptimeHMS}\s+${Time} 
+  ^${Processes} processes:\s+${Running} running,\s+${Sleeping} sleeping,\s+${Waiting} waiting
+  ^Mem:\s+${MemActive} Active,\s+${MemInact} Inact,\s+${MemWired} Wired,\s+${MemCache} Cache,\s+${MemBuf} Buf,\s+${MemFree} Free
+  ^Swap:\s+${SwapTotal} Total,\s+${SwapFree} Free -> Record

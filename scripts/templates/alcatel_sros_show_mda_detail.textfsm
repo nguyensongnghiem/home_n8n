@@ -1,0 +1,27 @@
+Value Slot (\d+)
+Value Mda (\d+)
+Value ProvisionedType (\S{3,})
+Value AdminState (\S+)
+Value OperState (\S+)
+Value PartNumber (\S+)
+Value Serial (\S+)
+Value Temperature (\d+C)
+
+Start  
+  ^MDA\s+${Slot}/${Mda} detail -> CardStart
+
+CardStart
+  ^Slot\s+Mda\s+Provisioned Type.*Admin.*Operational
+  ^\s*(?:\d+\s+)?\d+\s+${ProvisionedType}\s+${AdminState}\s+${OperState}  
+  ^MDA Specific Data -> SkipToHardware
+
+SkipToHardware
+  ^Hardware Data -> ParseHardware
+  ^.* -> SkipToHardware
+
+ParseHardware
+  ^\s*Part number\s+:\s+${PartNumber}
+  ^\s*Serial number\s+:\s+${Serial}
+  ^\s*Temperature\s+:\s+${Temperature}  
+  ^\s*$$ -> Record Start
+  ^.* -> ParseHardware

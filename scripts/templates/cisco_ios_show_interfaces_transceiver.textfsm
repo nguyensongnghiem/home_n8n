@@ -1,0 +1,17 @@
+Value Interface (\S+)
+Value Temperature_C (\d+\.\d+|\d+)
+Value Tx_Power_dBm ([-]?\d+\.\d+)
+Value Rx_Power_dBm ([-]?\d+\.\d+|[-]?\d+)
+
+Start
+  ^If device is.* -> Header
+  ^\s*Optical\s+Optical\s* -> Header
+  ^\s*Temperature\s+Voltage\s+Current\s+Tx Power\s+Rx Power\s* -> Header
+  ^Port\s+\(Celsius\).* -> Header
+  ^-+\s+-+\s+-+\s+-+\s+-+\s* -> Header
+  ^.* -> Header
+
+Header
+  ^${Interface}\s+${Temperature_C}\s+\d+\.\d+\s+\d+\.\d+\s+${Tx_Power_dBm}\s+${Rx_Power_dBm}\s* -> Record
+  ^\s* -> Start
+  ^.* -> Continue

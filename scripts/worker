@@ -1,0 +1,100 @@
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request));
+});
+
+async function handleRequest(request) {
+  const PUBLIC_KEY = '7e20a0bff1c069f82f20721f021e23122bced6b00413ed9b616571b09c12e9aa'; // Thay bằng Public Key từ Discord
+  const N8N_WEBHOOK_URL = 'https://d9f0-42-1-94-159.ngrok-free.app/webhook/c96fc6b2-2ee0-4909-acff-4026995fd0de'; // Thay bằng URL webhook của n8n
+
+  if (request.method === 'GET') {
+    return new Response('Worker is running!', { status: 200 });
+  }
+  if (request.method !== 'POST') {
+    return new Response('Method Not Allowed', { status: 405 });
+  }
+
+  try {
+    const signature = request.headers.get('X-Signature-Ed25519');
+    const timestamp = request.headers.get('X-Signature-Timestamp');
+    const body = await request.text();
+
+    console.log('Signature:', signature); // Debug
+    console.log('Timestamp:', timestamp); // Debug
+    console.log('Body:', body); // Debug
+
+    if (!signature || !timestamp) {
+      return new Response('Missing signature or timestamp', { status: 400 });
+    }
+
+    const isValid = await verifySignature(PUBLIC_KEY, signature, timestamp, body);
+    if (!isValid) {
+      return new Response('Invalid Signature', { status: 401 });
+    }
+
+    const jsonBody = JSON.parse(body);
+
+    // Xử lý PING request
+    if (jsonBody.type === 1) {
+      return new Response(JSON.stringify({ type: 1 }), {
+        headers: { 'Content-Type': 'application/json' },
+        status: 200
+      });
+    }
+
+    // Xử lý slash command (interaction type 2)
+    if (jsonBody.type === 2) {
+      try {
+        const n8nResponse = await fetch(N8N_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(jsonBody)
+        });
+
+        if (!n8nResponse.ok) {
+          console.error('n8n error:', n8nResponse.status, await n8nResponse.text());
+          return new Response('Error forwarding to n8n', { status: 500 });
+        }
+
+        const n8nData = await n8nResponse.json();
+        return new Response(JSON.stringify(n8nData), {
+          headers: { 'Content-Type': 'application/json' },
+          status: 200
+        });
+      } catch (error) {
+        console.error('Error forwarding to n8n:', error);
+        return new Response('Internal Server Error', { status: 500 });
+      }
+    }
+
+    return new Response('Invalid Request', { status: 400 });
+  } catch (error) {
+    console.error('Error:', error);
+    return new Response('Internal Server Error', { status: 500 });
+  }
+}
+
+async function verifySignature(publicKey, signature, timestamp, body) {
+  try {
+    const key = await crypto.subtle.importKey(
+      'raw',
+      hexToBytes(publicKey),
+      { name: 'Ed25519' },
+      false,
+      ['verify']
+    );
+    const signatureBytes = hexToBytes(signature);
+    const message = new TextEncoder().encode(timestamp + body);
+    return await crypto.subtle.verify('Ed25519', key, signatureBytes, message);
+  } catch (error) {
+    console.error('Signature verification failed:', error);
+    return false;
+  }
+}
+
+function hexToBytes(hex) {
+  const bytes = new Uint8Array(hex.length / 2);
+  for (let i = 0; i < hex.length; i += 2) {
+    bytes[i / 2] = parseInt(hex.substr(i, 2), 16);
+  }
+  return bytes;
+}

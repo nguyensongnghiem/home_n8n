@@ -1,0 +1,12 @@
+Value SOURCE (\S[\S ]+\S)
+Value TIME ([A-Z][a-z]{2} \d{1,2} \d{4} \d{2}:\d{2}:\d{2})
+Value SEVERITY (\S+)
+Value SYSLOG_STRING (\S+)
+Value DESCRIPTION (.+?)
+Value INDEX (\d+)
+
+Start
+  ^Source\s+Time\s+Severity\s+Syslog String\s+Description\s+\[Index\] -> RecordStart
+
+RecordStart
+  ^${SOURCE}\s+${TIME}\s+${SEVERITY}\s+${SYSLOG_STRING}\s+${DESCRIPTION} \[${INDEX}\] -> Record

@@ -1,0 +1,20 @@
+Value INDEX (\d+)
+Value DATETIME (\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}\.\d+)
+Value SEVERITY (\S+)
+Value ALARM_ID (\S+)
+Value RESOURCE (.+)
+Value DETAILS (.+)
+
+Start
+  ^={5,} -> Header
+
+Header
+  ^Index\s+Date/Time\s+Severity\s+Alarm\s+Resource -> AlarmLine
+
+AlarmLine
+  ^\s*${INDEX}\s+${DATETIME}\s+${SEVERITY}\s+${ALARM_ID}\s+${RESOURCE} -> GetDetails
+
+GetDetails
+  ^\s{3,}${DETAILS} -> Record
+  ^\s*${INDEX}\s+${DATETIME}\s+${SEVERITY}\s+${ALARM_ID}\s+${RESOURCE} -> GetDetails
+  ^={5,} -> EOF

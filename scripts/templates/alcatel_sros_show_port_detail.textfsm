@@ -1,0 +1,14 @@
+Value Description (\S+)
+Value Interface (\S+)
+Value Temperature (\S+)
+Value TX_Output_Power_dBm (\S+)
+Value RX_Optical_Power_avg_dBm (\S+)
+
+Start
+  ^Description\s+:\s+(${Description})
+  ^Interface\s+:\s+(${Interface})\s+Oper Speed
+  # Di chuyển đến phần Transceiver Digital Diagnostic Monitoring
+  ^Transceiver Digital Diagnostic Monitoring \(DDM\).*
+  ^Temperature \(C\) \s+(${Temperature})
+  ^Tx Output Power \(dBm\)\s+(${TX_Output_Power_dBm})
+  ^Rx Optical Power \(avg dBm\)\s+(${RX_Optical_Power_avg_dBm}) -> Record
