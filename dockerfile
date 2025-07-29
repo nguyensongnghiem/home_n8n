@@ -44,7 +44,7 @@ ENV PATH="/usr/local/bin:${PATH}"
 
 # Copy các script Python tùy chỉnh của bạn vào container.
 # Đảm bảo thư mục 'py_scripts' của bạn nằm cùng cấp với Dockerfile.
-COPY py_scripts/ /app/scripts/
+COPY scripts/ /app/scripts/
 
 # Đảm bảo các script có quyền thực thi.
 RUN chmod -R +x /app/scripts/

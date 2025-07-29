@@ -1,0 +1,4 @@
+# .gitignore
+n8n_data/
+postgres_data/
+.env
