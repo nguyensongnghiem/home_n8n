@@ -13,21 +13,16 @@ USER root
 # 'git' được thêm vào vì 'ntc-templates' có thể cần git để tải các template.
 RUN apk add --no-cache python3 py3-pip build-base libffi-dev openssl-dev gcc musl-dev git
 
-# Cài đặt thư viện Netmiko.
-RUN pip install --break-system-packages netmiko
-
-# --- BỔ SUNG: Cài đặt TextFSM và NTC-Templates ---
-# Cài đặt textfsm (ntc-templates sẽ tự động kéo theo)
-RUN pip install --break-system-packages textfsm
-
-# Cài đặt ntc-templates. Gói này cung cấp các template TextFSM đã được định nghĩa sẵn.
-# Netmiko có thể sử dụng các template này với phương thức send_command() hoặc parse_output().
-RUN pip install --break-system-packages ntc-templates
-
-
-RUN pip install --break-system-packages simplekml
-
-RUN pip install --break-system-packages requests
+# Cài đặt các thư viện Python cần thiết.
+RUN pip install --break-system-packages \
+    netmiko \
+    textfsm \
+    ntc-templates \
+    simplekml \
+    requests \
+    pandas \
+    xlsxwriter \
+    openpyxl
 
 # --- KẾT THÚC BỔ SUNG ---
 # Dọn dẹp các gói build-base và dev sau khi cài đặt để giảm kích thước image.
