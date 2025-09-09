@@ -13,7 +13,7 @@ services:
     volumes:
       - n8n_data:/home/node/.n8n
       # Nếu các script Python của bạn được mount, hãy thêm dòng này
-      # - ./scripts:/usr/src/app/scripts
+      - ./scripts:/usr/src/app/scripts
 
     environment:
       # --- Cấu hình cho Reverse Proxy trên Host ---
