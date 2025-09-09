@@ -6,7 +6,35 @@ import json
 import time
 import argparse
 
-def get_ors_route(api_key, start_coords, end_coords, profile="driving-car"):
+# Khởi tạo logger
+def setup_logger(log_file_path):
+    """Cấu hình logger để ghi log ra cả console và file."""
+    import logging
+    
+    # Tạo logger
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+
+    # Nếu logger đã có handler, tránh tạo thêm
+    if logger.hasHandlers():
+        logger.handlers.clear()
+
+    # Tạo formatter
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+
+    # Tạo handler để ghi log ra file
+    file_handler = logging.FileHandler(log_file_path, encoding='utf-8')
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+
+    # Tạo handler để ghi log ra console (stderr)
+    console_handler = logging.StreamHandler(sys.stderr)
+    console_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+
+    return logger
+
+def get_ors_route(api_key, start_coords, end_coords, profile="driving-car", logger=None):
     """
     Lấy dữ liệu tuyến đường từ Openrouteservice API.
     Args:
@@ -33,25 +61,29 @@ def get_ors_route(api_key, start_coords, end_coords, profile="driving-car"):
         response = requests.post(url, json=body, headers=headers)
         response.raise_for_status()
         data = response.json()
-        # print(data)
 
         coordinates = []
         if data and 'features' in data and len(data['features']) > 0:
             for segment in data['features'][0]['geometry']['coordinates']:
                 coordinates.append(tuple(segment))
+            if logger:
+                logger.info(f"API Openrouteservice: Lấy dữ liệu thành công cho {start_coords} -> {end_coords}.")
             return coordinates
         else:
-            sys.stderr.write(f"ERROR: Không tìm thấy dữ liệu tuyến đường cho {start_coords} -> {end_coords} trong phản hồi từ Openrouteservice.\n")
+            if logger:
+                logger.error(f"API Openrouteservice: Không tìm thấy dữ liệu tuyến đường cho {start_coords} -> {end_coords} trong phản hồi.")
             return None
 
     except requests.exceptions.RequestException as e:
-        sys.stderr.write(f"ERROR: Lỗi khi gọi API Openrouteservice cho {start_coords} -> {end_coords}: {e}\n")
+        if logger:
+            logger.error(f"API Openrouteservice: Lỗi khi gọi API cho {start_coords} -> {end_coords}: {e}")
         return None
     except KeyError as e:
-        sys.stderr.write(f"ERROR: Lỗi cấu trúc dữ liệu JSON từ Openrouteservice cho {start_coords} -> {end_coords}: {e}\n")
+        if logger:
+            logger.error(f"API Openrouteservice: Lỗi cấu trúc dữ liệu JSON từ Openrouteservice cho {start_coords} -> {end_coords}: {e}")
         return None
 
-def create_kml_from_routes(all_routes_data, main_folder_name="Các Tuyến Đường", doc_name="Các tuyến đường được tạo tự động"):
+def create_kml_from_routes(all_routes_data, main_folder_name="Các Tuyến Đường", doc_name="Các tuyến đường được tạo tự động", logger=None):
     """
     Tạo một file KML duy nhất chứa nhiều tuyến đường.
     Args:
@@ -70,16 +102,13 @@ def create_kml_from_routes(all_routes_data, main_folder_name="Các Tuyến Đư�
         str: Chuỗi nội dung KML hoặc None nếu có lỗi.
     """
     if not all_routes_data:
-        sys.stderr.write("ERROR: Không có dữ liệu tuyến đường để tạo KML.\n")
+        if logger:
+            logger.error("Không có dữ liệu tuyến đường để tạo KML.")
         return None
 
     kml = simplekml.Kml(name=doc_name)
-    # Dictionary để theo dõi các thư mục đã tạo, tránh trùng lặp.
-    # Key là một tuple đại diện cho đường dẫn thư mục, ví dụ: ('Quảng Nam 1',) hoặc ('Quảng Nam 1', 'Ring 1')
-    # Value là đối tượng simplekml.Folder tương ứng.
     created_folders = {}
     
-    # Tạo thư mục chính (cấp 1) trong KML Document
     main_folder_path = (main_folder_name,)
     main_folder_object = kml.newfolder(name=main_folder_name)
     created_folders[main_folder_path] = main_folder_object
@@ -95,26 +124,22 @@ def create_kml_from_routes(all_routes_data, main_folder_name="Các Tuyến Đư�
         third_folder_name = route_info.get('ThirdFolderName')
         
         if not route_coords:
-            sys.stderr.write(f"Cảnh báo: Tuyến đường '{line_name}' không có tọa độ, bỏ qua.\n")
+            if logger:
+                logger.warning(f"Tuyến đường '{line_name}' không có tọa độ, bỏ qua.")
             continue
 
-        # Xác định thư mục cấp 1 (bên trong thư mục chính)
         level1_path = (main_folder_name, folder_name)
         if level1_path not in created_folders:
-            # Tạo thư mục cấp 1 nếu nó chưa tồn tại
             created_folders[level1_path] = main_folder_object.newfolder(name=folder_name)
         current_folder = created_folders[level1_path]
 
-        # Xác định thư mục cấp 2 (nếu có)
         if second_folder_name:
             level2_path = (main_folder_name, folder_name, second_folder_name)
             if level2_path not in created_folders:
-                # Tạo thư mục cấp 2 nếu nó chưa tồn tại
                 level1_folder_object = created_folders[level1_path]
                 created_folders[level2_path] = level1_folder_object.newfolder(name=second_folder_name)
             current_folder = created_folders[level2_path]
 
-            # Xác định thư mục cấp 3 (nếu có)
             if third_folder_name:
                 level3_path = (main_folder_name, folder_name, second_folder_name, third_folder_name)
                 if level3_path not in created_folders:
@@ -130,71 +155,34 @@ def create_kml_from_routes(all_routes_data, main_folder_name="Các Tuyến Đư�
         linestring_placemark.style.linestyle.color = color
         linestring_placemark.style.linestyle.width = width
 
-        # start_point = current_folder.newpoint(name=f"Bắt đầu: {line_name}")
-        # start_point.coords = [route_coords[0]]
-        # start_point.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/paddle/grn-blank.png' # Icon màu xanh lá cây
-        # start_point.style.iconstyle.scale = 0.8
-
-        # end_point = current_folder.newpoint(name=f"Kết thúc: {line_name}")
-        # end_point.coords = [route_coords[-1]]
-        # end_point.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/paddle/red-blank.png' # Icon màu đỏ
-        # end_point.style.iconstyle.scale = 0.8
-
     try:
-        return kml.kml() # Trả về chuỗi KML, prettyprint=True để định dạng đẹp
+        if logger:
+            logger.info("Tạo chuỗi KML thành công.")
+        return kml.kml()
     except Exception as e:
-        sys.stderr.write(f"ERROR: Lỗi khi tạo chuỗi KML: {e}\n")
+        if logger:
+            logger.error(f"Lỗi khi tạo chuỗi KML: {e}")
         return None
 
 if __name__ == "__main__":
-    # --- CẤU HÌNH QUA DÒNG LỆNH ---
     parser = argparse.ArgumentParser(
         description="Tạo KML chứa các tuyến đường được tính toán bởi Openrouteservice từ một file JSON đầu vào.",
         formatter_class=argparse.RawTextHelpFormatter
     )
     
-    parser.add_argument(
-        '--input-file', 
-        type=str, 
-        help='Đường dẫn đến file JSON chứa dữ liệu các tuyến đường.\nBắt buộc khi không sử dụng --use-mock.'
-    )
-    
-    parser.add_argument(
-        '--api-key', 
-        type=str, 
-        required=True, 
-        help='Khóa API của Openrouteservice (bắt buộc).'
-    )
-    
-    parser.add_argument(
-        '--profile', 
-        type=str, 
-        default='driving-car', 
-        help='Hồ sơ định tuyến (mặc định: driving-car).\nCác lựa chọn khác: cycling-regular, walking, ...'
-    )
-    
-    parser.add_argument(
-        '--rate-limit',
-        type=int,
-        default=20,
-        help='Số request tối đa mỗi phút gửi đến API Openrouteservice (mặc định: 40).'
-    )
-    
-    parser.add_argument(
-        '--output-file', 
-        type=str, 
-        required=True,
-        help='Đường dẫn đầy đủ để lưu file KML đầu ra.'
-    )
-    
-    parser.add_argument(
-        '--use-mock', 
-        action='store_true', 
-        help='Sử dụng dữ liệu mock có sẵn trong script thay vì đọc từ file.'
-    )
+    parser.add_argument('--input-file', type=str, help='Đường dẫn đến file JSON chứa dữ liệu các tuyến đường.\nBắt buộc khi không sử dụng --use-mock.')
+    parser.add_argument('--api-key', type=str, required=True, help='Khóa API của Openrouteservice (bắt buộc).')
+    parser.add_argument('--profile', type=str, default='driving-car', help="Hồ sơ định tuyến (mặc định: 'driving-car').\nCác lựa chọn khác: 'cycling-regular', 'walking', ...")
+    parser.add_argument('--rate-limit', type=int, default=20, help='Số request tối đa mỗi phút gửi đến API Openrouteservice (mặc định: 20).')
+    parser.add_argument('--output-file', type=str, required=True, help='Đường dẫn đầy đủ để lưu file KML đầu ra.')
+    parser.add_argument('--log-file', type=str, default='processing.log', help='Đường dẫn để lưu file log quá trình xử lý (mặc định: processing.log).')
+    parser.add_argument('--use-mock', action='store_true', help='Sử dụng dữ liệu mock có sẵn trong script thay vì đọc từ file.')
 
     args = parser.parse_args()
-    # -----------------------
+
+    # Cấu hình logger
+    logger = setup_logger(args.log_file)
+    logger.info("Bắt đầu chương trình.")
 
     # Dữ liệu mock (chỉ sử dụng khi USE_MOCK_DATA là True)
     mock_routes_data = [
@@ -326,57 +314,53 @@ if __name__ == "__main__":
       }
     ]
 
-    # --- LOGIC XỬ LÝ ĐẦU VÀO ---
     routes_to_process = []
-
     if args.use_mock:
-        sys.stderr.write("INFO: Sử dụng dữ liệu MOCK để chạy thử.\n")
+        logger.info("Sử dụng dữ liệu MOCK để chạy thử.")
         routes_to_process = mock_routes_data
     else: # Đọc từ file JSON
         if not args.input_file:
-            sys.stderr.write("ERROR: Khi không sử dụng --use-mock, bạn phải cung cấp đường dẫn file với --input-file.\n")
+            logger.error("Khi không sử dụng --use-mock, bạn phải cung cấp đường dẫn file với --input-file.")
             parser.print_help(sys.stderr)
             sys.exit(1)
             
         if not os.path.exists(args.input_file):
-            sys.stderr.write(f"ERROR: File JSON đầu vào không tồn tại tại đường dẫn: '{args.input_file}'.\n")
+            logger.error(f"File JSON đầu vào không tồn tại tại đường dẫn: '{args.input_file}'.")
             sys.exit(1)
 
         try:
             with open(args.input_file, 'r', encoding='utf-8') as f:
                 routes_to_process = json.load(f)[0]["rawData"]
+            logger.info(f"Đọc dữ liệu từ file '{args.input_file}' thành công.")
         except json.JSONDecodeError as e:
-            sys.stderr.write(f"ERROR: Lỗi đọc file JSON: {e}\n")
+            logger.error(f"Lỗi đọc file JSON: {e}")
             sys.exit(1)
         except (KeyError, IndexError) as e:
-            sys.stderr.write(f"ERROR: Cấu trúc JSON không đúng. Mong đợi một mảng chứa đối tượng có key 'rawData'. Lỗi: {e}\n")
+            logger.error(f"Cấu trúc JSON không đúng. Mong đợi một mảng chứa đối tượng có key 'rawData'. Lỗi: {e}")
             sys.exit(1)
         except Exception as e:
-            sys.stderr.write(f"ERROR: Lỗi khi mở hoặc đọc file JSON: {e}\n")
+            logger.error(f"Lỗi khi mở hoặc đọc file JSON: {e}")
             sys.exit(1)
 
         if not isinstance(routes_to_process, list):
-            sys.stderr.write("ERROR: Cấu trúc file JSON không đúng. Phải là một mảng (list) các đối tượng tuyến đường.\n")
+            logger.error("Cấu trúc file JSON không đúng. Phải là một mảng (list) các đối tượng tuyến đường.")
             sys.exit(1)
 
     all_generated_routes_data = []
-    
-    # --- Cấu hình Rate Limiting ---
     request_count = 0
-    # -----------------------------
 
     for i, route_data in enumerate(routes_to_process):
+        line_name = route_data.get('LineName', f"Tuyến đường {i+1}")
+        
+        # Ghi log trước khi xử lý từng tuyến đường
+        logger.info(f"Đang xử lý tuyến đường: '{line_name}' (số thứ tự: {i+1}/{len(routes_to_process)}).")
+        
         try:
-            # --- Bắt đầu logic Rate Limiting (phiên bản đơn giản) ---
-            # Kiểm tra trước khi thực hiện request
             if request_count >= args.rate_limit:
-                sys.stderr.write(f"INFO: Đã đạt giới hạn {args.rate_limit} request. Tạm dừng 60 giây...\n")
+                logger.info(f"Đã đạt giới hạn {args.rate_limit} request. Tạm dừng 60 giây...")
                 time.sleep(60)
-                # Reset bộ đếm cho phút tiếp theo
                 request_count = 0
-            # --- Kết thúc logic Rate Limiting ---
 
-            line_name = route_data.get('LineName', f"Tuyến đường {i+1}")
             lat1 = float(route_data.get('Latitude1'))
             lon1 = float(route_data.get('Longitude1'))
             lat2 = float(route_data.get('Latitude2'))
@@ -384,29 +368,24 @@ if __name__ == "__main__":
             
             kml_color = route_data.get('Color') 
             if not kml_color:
-                sys.stderr.write(f"Cảnh báo: Tuyến đường '{line_name}' thiếu màu KML, sử dụng màu mặc định blue.\n")
+                logger.warning(f"Tuyến đường '{line_name}' thiếu màu KML, sử dụng màu mặc định blue.")
                 kml_color = simplekml.Color.blue
             
-            width = int(route_data.get('Width'))
+            width = route_data.get('Width')
             kml_width = int(width) if isinstance(width, (int, float)) else 4
 
             description = str(route_data.get('Description', ''))
             folder_name = route_data.get('FolderName', 'Tuyến đường chung') 
 
             if None in [lat1, lon1, lat2, lon2]:
-                sys.stderr.write(f"Cảnh báo: Tuyến đường '{line_name}' thiếu tọa độ (Lat/Lon), bỏ qua.\n")
+                logger.warning(f"Tuyến đường '{line_name}' thiếu tọa độ (Lat/Lon), bỏ qua.")
                 continue
 
             start_coords = (float(lon1), float(lat1))
             end_coords = (float(lon2), float(lat2))
-
-            # print(f"  - Đang tìm đường cho '{line_name}' ({start_coords} -> {end_coords})...")
             
-            # Đây là nơi API Openrouteservice được gọi.
-            # Nếu USE_MOCK_DATA là True, bạn có thể cân nhắc việc MOCK cả phản hồi API ở đây
-            # để không cần gọi API thật. Hiện tại, nó vẫn sẽ gọi API thật.
-            route_coordinates = get_ors_route(args.api_key, start_coords, end_coords, args.profile)
-            request_count += 1 # Chỉ tăng bộ đếm sau khi gọi API
+            route_coordinates = get_ors_route(args.api_key, start_coords, end_coords, args.profile, logger)
+            request_count += 1
 
             if route_coordinates:
                 all_generated_routes_data.append({
@@ -419,47 +398,48 @@ if __name__ == "__main__":
                     'SecondFolderName': route_data.get('SecondFolderName'),
                     'ThirdFolderName': route_data.get('ThirdFolderName')
                 })
+                logger.info(f"Tuyến đường '{line_name}' xử lý thành công.")
             else:
-                sys.stderr.write(f"Cảnh báo: Không thể lấy dữ liệu tuyến đường cho '{line_name}'.\n")
+                logger.warning(f"Không thể lấy dữ liệu tuyến đường cho '{line_name}'.")
 
         except ValueError as e:
-            sys.stderr.write(f"ERROR: Lỗi chuyển đổi kiểu dữ liệu cho tuyến đường '{line_name}': {e}. Đảm bảo tọa độ là số và độ rộng là số nguyên.\n")
+            logger.error(f"Lỗi chuyển đổi kiểu dữ liệu cho tuyến đường '{line_name}': {e}. Đảm bảo tọa độ là số và độ rộng là số nguyên.")
             continue
         except Exception as e:
-            sys.stderr.write(f"Lỗi không xác định khi xử lý tuyến đường thứ {i+1} ('{line_name}'): {e}\n")
+            logger.error(f"Lỗi không xác định khi xử lý tuyến đường thứ {i+1} ('{line_name}'): {e}")
             continue
 
     if all_generated_routes_data:
-        kml_content = create_kml_from_routes(all_generated_routes_data, main_folder_name="Các Tuyến Đường")
+        kml_content = create_kml_from_routes(all_generated_routes_data, main_folder_name="Các Tuyến Đường", logger=logger)
         if kml_content:
             try:
-                # Đảm bảo thư mục chứa file đầu ra tồn tại
                 output_dir = os.path.dirname(args.output_file)
                 if output_dir:
                     os.makedirs(output_dir, exist_ok=True)
 
-                # Ghi nội dung KML vào file
                 with open(args.output_file, 'w', encoding='utf-8') as f:
                     f.write(kml_content)
                 
-                # Trả về JSON chứa đường dẫn file đã tạo thành công
                 result = {
                     "status": "success",
                     "kml_file_path": args.output_file,
                     "message": f"Tạo file KML thành công chứa {len(all_generated_routes_data)} tuyến đường."
                 }
+                logger.info(f"Ghi file KML thành công vào '{args.output_file}'.")
                 print(json.dumps(result))
 
             except IOError as e:
-                sys.stderr.write(f"ERROR: Không thể ghi vào file KML '{args.output_file}': {e}\n")
+                logger.error(f"Không thể ghi vào file KML '{args.output_file}': {e}")
                 result = {"status": "error", "message": f"Không thể ghi vào file KML: {e}"}
                 print(json.dumps(result))
                 sys.exit(1)
         else:
             result = {"status": "error", "message": "Không thể tạo nội dung KML từ dữ liệu đã xử lý."}
+            logger.error("Không thể tạo nội dung KML.")
             print(json.dumps(result))
             sys.exit(1)
     else:
         result = {"status": "error", "message": "Không có tuyến đường nào được xử lý thành công để tạo KML."}
+        logger.error("Không có tuyến đường nào được xử lý thành công.")
         print(json.dumps(result))
         sys.exit(1)

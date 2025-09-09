@@ -1,0 +1,269 @@
+2025-08-28 13:00:08 - INFO - Bắt đầu chương trình.
+2025-08-28 13:00:08 - INFO - Sử dụng dữ liệu MOCK để chạy thử.
+2025-08-28 13:00:08 - INFO - Đang xử lý tuyến đường: 'TTCMKV Điện Bàn - An Thắng' (số thứ tự: 1/9).
+2025-08-28 13:00:12 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.254, 15.8876) -> (108.2391, 15.903).
+2025-08-28 13:00:12 - INFO - Tuyến đường 'TTCMKV Điện Bàn - An Thắng' xử lý thành công.
+2025-08-28 13:00:12 - INFO - Đang xử lý tuyến đường: 'An Thắng - Điện Bàn Đông' (số thứ tự: 2/9).
+2025-08-28 13:00:15 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.2391, 15.903) -> (108.2665, 15.9158).
+2025-08-28 13:00:15 - INFO - Tuyến đường 'An Thắng - Điện Bàn Đông' xử lý thành công.
+2025-08-28 13:00:15 - INFO - Đang xử lý tuyến đường: 'Điện Bàn Đông - Hội An Tây' (số thứ tự: 3/9).
+2025-08-28 13:00:21 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.2665, 15.9158) -> (108.3261, 15.8864).
+2025-08-28 13:00:21 - INFO - Tuyến đường 'Điện Bàn Đông - Hội An Tây' xử lý thành công.
+2025-08-28 13:00:21 - INFO - Đang xử lý tuyến đường: 'Hội An Tây - Hội An' (số thứ tự: 4/9).
+2025-08-28 13:00:22 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.3261, 15.8864) -> (108.3351, 15.8824).
+2025-08-28 13:00:22 - INFO - Tuyến đường 'Hội An Tây - Hội An' xử lý thành công.
+2025-08-28 13:00:22 - INFO - Đang xử lý tuyến đường: 'Hội An - TTCMKV Hội An' (số thứ tự: 5/9).
+2025-08-28 13:00:24 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.3351, 15.8824) -> (108.3318, 15.8802).
+2025-08-28 13:00:24 - INFO - Tuyến đường 'Hội An - TTCMKV Hội An' xử lý thành công.
+2025-08-28 13:00:24 - INFO - Đang xử lý tuyến đường: 'TTCMKV Điện Bàn - Điện Bàn' (số thứ tự: 6/9).
+2025-08-28 13:00:25 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.254, 15.8876) -> (108.2499, 15.89).
+2025-08-28 13:00:25 - INFO - Tuyến đường 'TTCMKV Điện Bàn - Điện Bàn' xử lý thành công.
+2025-08-28 13:00:25 - INFO - Đang xử lý tuyến đường: 'Điện Bàn - Điện Bàn Tây' (số thứ tự: 7/9).
+2025-08-28 13:00:27 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.2499, 15.89) -> (108.18, 15.8885).
+2025-08-28 13:00:27 - INFO - Tuyến đường 'Điện Bàn - Điện Bàn Tây' xử lý thành công.
+2025-08-28 13:00:27 - INFO - Đang xử lý tuyến đường: 'Điện Bàn Tây - Điện Bàn Bắc' (số thứ tự: 8/9).
+2025-08-28 13:00:28 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.18, 15.8885) -> (108.1965, 15.9341).
+2025-08-28 13:00:28 - INFO - Tuyến đường 'Điện Bàn Tây - Điện Bàn Bắc' xử lý thành công.
+2025-08-28 13:00:28 - INFO - Đang xử lý tuyến đường: 'Điện Bàn Bắc - TTCMKV Hội An' (số thứ tự: 9/9).
+2025-08-28 13:00:29 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.1965, 15.9341) -> (108.3318, 15.8802).
+2025-08-28 13:00:29 - INFO - Tuyến đường 'Điện Bàn Bắc - TTCMKV Hội An' xử lý thành công.
+2025-08-28 13:00:29 - INFO - Tạo chuỗi KML thành công.
+2025-08-28 13:00:30 - INFO - Ghi file KML thành công vào 'test_route_kml_tmp.kml'.
+2025-08-28 15:33:59 - INFO - Bắt đầu chương trình.
+2025-08-28 15:33:59 - INFO - Sử dụng dữ liệu MOCK để chạy thử.
+2025-08-28 15:33:59 - INFO - Đang xử lý tuyến đường: 'CA Công an tỉnh - Quy Nhơn Nam' (số thứ tự: 1/75).
+2025-08-28 15:34:00 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.2254849, 13.7693908) -> (109.207684, 13.755567).
+2025-08-28 15:34:00 - INFO - Tuyến đường 'CA Công an tỉnh - Quy Nhơn Nam' xử lý thành công.
+2025-08-28 15:34:00 - INFO - Đang xử lý tuyến đường: 'Quy Nhơn Nam - Quy Nhơn' (số thứ tự: 2/75).
+2025-08-28 15:34:01 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.207684, 13.755567) -> (109.2245955, 13.7656499).
+2025-08-28 15:34:01 - INFO - Tuyến đường 'Quy Nhơn Nam - Quy Nhơn' xử lý thành công.
+2025-08-28 15:34:01 - INFO - Đang xử lý tuyến đường: 'Quy Nhơn - Quy Nhơn Bắc' (số thứ tự: 3/75).
+2025-08-28 15:34:02 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.2245955, 13.7656499) -> (109.1482887, 13.786033).
+2025-08-28 15:34:02 - INFO - Tuyến đường 'Quy Nhơn - Quy Nhơn Bắc' xử lý thành công.
+2025-08-28 15:34:02 - INFO - Đang xử lý tuyến đường: 'Quy Nhơn Bắc - TTCMKV An Nhơn' (số thứ tự: 4/75).
+2025-08-28 15:34:05 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.1482887, 13.786033) -> (109.1104821, 13.8868401).
+2025-08-28 15:34:05 - INFO - Tuyến đường 'Quy Nhơn Bắc - TTCMKV An Nhơn' xử lý thành công.
+2025-08-28 15:34:05 - INFO - Đang xử lý tuyến đường: 'TTCMKV Vân Canh - Vân Canh' (số thứ tự: 5/75).
+2025-08-28 15:34:06 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.9971569, 13.6226632) -> (108.9971569, 13.6226632).
+2025-08-28 15:34:06 - INFO - Tuyến đường 'TTCMKV Vân Canh - Vân Canh' xử lý thành công.
+2025-08-28 15:34:06 - INFO - Đang xử lý tuyến đường: 'Vân Canh - Canh Vinh' (số thứ tự: 6/75).
+2025-08-28 15:34:07 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.9971569, 13.6226632) -> (109.082708, 13.733403).
+2025-08-28 15:34:07 - INFO - Tuyến đường 'Vân Canh - Canh Vinh' xử lý thành công.
+2025-08-28 15:34:07 - INFO - Đang xử lý tuyến đường: 'Canh Vinh - Quy Nhơn Tây' (số thứ tự: 7/75).
+2025-08-28 15:34:09 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.082708, 13.733403) -> (109.1519561, 13.7465753).
+2025-08-28 15:34:09 - INFO - Tuyến đường 'Canh Vinh - Quy Nhơn Tây' xử lý thành công.
+2025-08-28 15:34:09 - INFO - Đang xử lý tuyến đường: 'Quy Nhơn Tây - CA Công an tỉnh' (số thứ tự: 8/75).
+2025-08-28 15:34:10 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.1519561, 13.7465753) -> (109.2254849, 13.7693908).
+2025-08-28 15:34:10 - INFO - Tuyến đường 'Quy Nhơn Tây - CA Công an tỉnh' xử lý thành công.
+2025-08-28 15:34:10 - INFO - Đang xử lý tuyến đường: 'TTCMKV Vân Canh - Canh Liên' (số thứ tự: 9/75).
+2025-08-28 15:34:12 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.9971569, 13.6226632) -> (108.907003, 13.621846).
+2025-08-28 15:34:12 - INFO - Tuyến đường 'TTCMKV Vân Canh - Canh Liên' xử lý thành công.
+2025-08-28 15:34:12 - INFO - Đang xử lý tuyến đường: 'Canh Liên - TTCMKV Vân Canh' (số thứ tự: 10/75).
+2025-08-28 15:34:15 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.907003, 13.621846) -> (108.9971569, 13.6226632).
+2025-08-28 15:34:15 - INFO - Tuyến đường 'Canh Liên - TTCMKV Vân Canh' xử lý thành công.
+2025-08-28 15:34:15 - INFO - Đang xử lý tuyến đường: 'CA Tỉnh - Quy Nhơn Đông' (số thứ tự: 11/75).
+2025-08-28 15:34:18 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.2254849, 13.7693908) -> (109.24892, 13.8806797).
+2025-08-28 15:34:18 - INFO - Tuyến đường 'CA Tỉnh - Quy Nhơn Đông' xử lý thành công.
+2025-08-28 15:34:18 - INFO - Đang xử lý tuyến đường: 'Quy Nhơn Đông - Cát Tiến' (số thứ tự: 12/75).
+2025-08-28 15:34:19 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.24892, 13.8806797) -> (109.236194, 13.949139).
+2025-08-28 15:34:19 - INFO - Tuyến đường 'Quy Nhơn Đông - Cát Tiến' xử lý thành công.
+2025-08-28 15:34:19 - INFO - Đang xử lý tuyến đường: 'Cát Tiến - Đề Gi' (số thứ tự: 13/75).
+2025-08-28 15:34:21 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.236194, 13.949139) -> (109.183, 14.112361).
+2025-08-28 15:34:21 - INFO - Tuyến đường 'Cát Tiến - Đề Gi' xử lý thành công.
+2025-08-28 15:34:21 - INFO - Đang xử lý tuyến đường: 'Đề Gi - An Lương' (số thứ tự: 14/75).
+2025-08-28 15:34:25 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.183, 14.112361) -> (109.11829, 14.158483).
+2025-08-28 15:34:25 - INFO - Tuyến đường 'Đề Gi - An Lương' xử lý thành công.
+2025-08-28 15:34:25 - INFO - Đang xử lý tuyến đường: 'An Lương - Phù Mỹ Nam' (số thứ tự: 15/75).
+2025-08-28 15:34:26 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.11829, 14.158483) -> (109.044147, 14.120679).
+2025-08-28 15:34:26 - INFO - Tuyến đường 'An Lương - Phù Mỹ Nam' xử lý thành công.
+2025-08-28 15:34:26 - INFO - Đang xử lý tuyến đường: 'Phù Mỹ Nam - TTCMKV Phù Mỹ' (số thứ tự: 16/75).
+2025-08-28 15:34:28 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.044147, 14.120679) -> (109.0462591, 14.1688339).
+2025-08-28 15:34:28 - INFO - Tuyến đường 'Phù Mỹ Nam - TTCMKV Phù Mỹ' xử lý thành công.
+2025-08-28 15:34:28 - INFO - Đang xử lý tuyến đường: 'CA Tỉnh - Tuy Phước Tây' (số thứ tự: 17/75).
+2025-08-28 15:34:35 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.2254849, 13.7693908) -> (109.112283, 13.774072).
+2025-08-28 15:34:35 - INFO - Tuyến đường 'CA Tỉnh - Tuy Phước Tây' xử lý thành công.
+2025-08-28 15:34:35 - INFO - Đang xử lý tuyến đường: 'Tuy Phước Tây - An Nhơn Nam' (số thứ tự: 18/75).
+2025-08-28 15:34:37 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.112283, 13.774072) -> (109.097569, 13.8638021).
+2025-08-28 15:34:37 - INFO - Tuyến đường 'Tuy Phước Tây - An Nhơn Nam' xử lý thành công.
+2025-08-28 15:34:37 - INFO - Đang xử lý tuyến đường: 'An Nhơn Nam - An Nhơn Tây' (số thứ tự: 19/75).
+2025-08-28 15:34:38 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.097569, 13.8638021) -> (109.043344, 13.8689).
+2025-08-28 15:34:38 - INFO - Tuyến đường 'An Nhơn Nam - An Nhơn Tây' xử lý thành công.
+2025-08-28 15:34:38 - INFO - Đang xử lý tuyến đường: 'An Nhơn Tây - An Nhơn Đông' (số thứ tự: 20/75).
+2025-08-28 15:34:40 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.043344, 13.8689) -> (109.107419, 13.899842).
+2025-08-28 15:34:40 - INFO - Tuyến đường 'An Nhơn Tây - An Nhơn Đông' xử lý thành công.
+2025-08-28 15:34:40 - INFO - Đang xử lý tuyến đường: 'An Nhơn Đông - An Nhơn' (số thứ tự: 21/75).
+2025-08-28 15:34:41 - WARNING - Lỗi 429: Too many requests. Đang thử lại sau 1.00 giây (lần 1/5).
+2025-08-28 15:34:45 - WARNING - Lỗi 429: Too many requests. Đang thử lại sau 2.00 giây (lần 2/5).
+2025-08-28 15:34:50 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.107419, 13.899842) -> (109.0666416, 13.913845).
+2025-08-28 15:34:50 - INFO - Tuyến đường 'An Nhơn Đông - An Nhơn' xử lý thành công.
+2025-08-28 15:34:50 - INFO - Đang xử lý tuyến đường: 'An Nhơn - An Nhơn Bắc' (số thứ tự: 22/75).
+2025-08-28 15:34:51 - WARNING - Lỗi 429: Too many requests. Đang thử lại sau 1.00 giây (lần 1/5).
+2025-08-28 15:34:55 - WARNING - Lỗi 429: Too many requests. Đang thử lại sau 2.00 giây (lần 2/5).
+2025-08-28 15:34:58 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.0666416, 13.913845) -> (109.0654367, 13.9479021).
+2025-08-28 15:34:58 - INFO - Tuyến đường 'An Nhơn - An Nhơn Bắc' xử lý thành công.
+2025-08-28 15:34:58 - INFO - Đang xử lý tuyến đường: 'An Nhơn Bắc - TTCMKV An Nhơn' (số thứ tự: 23/75).
+2025-08-28 15:34:59 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.0654367, 13.9479021) -> (109.1104821, 13.8868401).
+2025-08-28 15:34:59 - INFO - Tuyến đường 'An Nhơn Bắc - TTCMKV An Nhơn' xử lý thành công.
+2025-08-28 15:34:59 - INFO - Đang xử lý tuyến đường: 'CA Tỉnh - Tuy Phước' (số thứ tự: 24/75).
+2025-08-28 15:35:00 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.2254849, 13.7693908) -> (109.1667936, 13.82680534).
+2025-08-28 15:35:00 - INFO - Tuyến đường 'CA Tỉnh - Tuy Phước' xử lý thành công.
+2025-08-28 15:35:00 - INFO - Đang xử lý tuyến đường: 'Tuy Phước - Tuy Phước Đông' (số thứ tự: 25/75).
+2025-08-28 15:35:01 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.1667936, 13.82680534) -> (109.188286, 13.86652).
+2025-08-28 15:35:01 - INFO - Tuyến đường 'Tuy Phước - Tuy Phước Đông' xử lý thành công.
+2025-08-28 15:35:01 - INFO - Đang xử lý tuyến đường: 'Tuy Phước Đông - Tuy Phước Bắc' (số thứ tự: 26/75).
+2025-08-28 15:35:03 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.188286, 13.86652) -> (109.145782, 13.8891947).
+2025-08-28 15:35:03 - INFO - Tuyến đường 'Tuy Phước Đông - Tuy Phước Bắc' xử lý thành công.
+2025-08-28 15:35:03 - INFO - Đang xử lý tuyến đường: 'Tuy Phước Bắc - Bình Định' (số thứ tự: 27/75).
+2025-08-28 15:35:05 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.145782, 13.8891947) -> (109.1104821, 13.8868401).
+2025-08-28 15:35:05 - INFO - Tuyến đường 'Tuy Phước Bắc - Bình Định' xử lý thành công.
+2025-08-28 15:35:05 - INFO - Đang xử lý tuyến đường: 'Bình Định - TTCMKV An Nhơn' (số thứ tự: 28/75).
+2025-08-28 15:35:06 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.1104821, 13.8868401) -> (109.1104821, 13.8868401).
+2025-08-28 15:35:06 - INFO - Tuyến đường 'Bình Định - TTCMKV An Nhơn' xử lý thành công.
+2025-08-28 15:35:06 - INFO - Đang xử lý tuyến đường: 'TTCMKV Tây Sơn - Tây Sơn' (số thứ tự: 29/75).
+2025-08-28 15:35:08 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.9169228, 13.9080995) -> (108.9169228, 13.9080995).
+2025-08-28 15:35:08 - INFO - Tuyến đường 'TTCMKV Tây Sơn - Tây Sơn' xử lý thành công.
+2025-08-28 15:35:08 - INFO - Đang xử lý tuyến đường: 'Tây Sơn - Bình Phú' (số thứ tự: 30/75).
+2025-08-28 15:35:09 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.9169228, 13.9080995) -> (108.91022, 13.903522).
+2025-08-28 15:35:09 - INFO - Tuyến đường 'Tây Sơn - Bình Phú' xử lý thành công.
+2025-08-28 15:35:09 - INFO - Đang xử lý tuyến đường: 'Bình Phú - Bình Khê' (số thứ tự: 31/75).
+2025-08-28 15:35:10 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.91022, 13.903522) -> (108.8011166, 13.9834128).
+2025-08-28 15:35:10 - INFO - Tuyến đường 'Bình Phú - Bình Khê' xử lý thành công.
+2025-08-28 15:35:10 - INFO - Đang xử lý tuyến đường: 'Bình Khê - Vĩnh Quang' (số thứ tự: 32/75).
+2025-08-28 15:35:11 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.8011166, 13.9834128) -> (108.7918889, 14.0651667).
+2025-08-28 15:35:11 - INFO - Tuyến đường 'Bình Khê - Vĩnh Quang' xử lý thành công.
+2025-08-28 15:35:11 - INFO - Đang xử lý tuyến đường: 'Vĩnh Quang - Vĩnh Thạnh' (số thứ tự: 33/75).
+2025-08-28 15:35:12 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.7918889, 14.0651667) -> (108.7863861, 14.1066656).
+2025-08-28 15:35:12 - INFO - Tuyến đường 'Vĩnh Quang - Vĩnh Thạnh' xử lý thành công.
+2025-08-28 15:35:12 - INFO - Đang xử lý tuyến đường: 'Vĩnh Thạnh - Vĩnh Thịnh' (số thứ tự: 34/75).
+2025-08-28 15:35:14 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.7863861, 14.1066656) -> (108.7948611, 14.0812778).
+2025-08-28 15:35:14 - INFO - Tuyến đường 'Vĩnh Thạnh - Vĩnh Thịnh' xử lý thành công.
+2025-08-28 15:35:15 - INFO - Đang xử lý tuyến đường: 'Vĩnh Thịnh - TTCMKV Vĩnh Thạnh' (số thứ tự: 35/75).
+2025-08-28 15:35:16 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.7948611, 14.0812778) -> (108.7863861, 14.1066656).
+2025-08-28 15:35:16 - INFO - Tuyến đường 'Vĩnh Thịnh - TTCMKV Vĩnh Thạnh' xử lý thành công.
+2025-08-28 15:35:16 - INFO - Đang xử lý tuyến đường: 'TTCMKV Vĩnh Thạnh - Vĩnh Hảo' (số thứ tự: 36/75).
+2025-08-28 15:35:22 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.7863861, 14.1066656) -> (108.786, 14.1334).
+2025-08-28 15:35:22 - INFO - Tuyến đường 'TTCMKV Vĩnh Thạnh - Vĩnh Hảo' xử lý thành công.
+2025-08-28 15:35:22 - INFO - Đang xử lý tuyến đường: 'Vĩnh Hảo - Vĩnh Sơn' (số thứ tự: 37/75).
+2025-08-28 15:35:25 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.786, 14.1334) -> (108.7526944, 14.3356389).
+2025-08-28 15:35:25 - INFO - Tuyến đường 'Vĩnh Hảo - Vĩnh Sơn' xử lý thành công.
+2025-08-28 15:35:25 - INFO - Đang xử lý tuyến đường: 'Vĩnh Sơn - Vĩnh Hảo' (số thứ tự: 38/75).
+2025-08-28 15:35:31 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.7526944, 14.3356389) -> (108.786, 14.1334).
+2025-08-28 15:35:31 - INFO - Tuyến đường 'Vĩnh Sơn - Vĩnh Hảo' xử lý thành công.
+2025-08-28 15:35:31 - INFO - Đang xử lý tuyến đường: 'Vĩnh Hảo - TTCMKV Vĩnh Thạnh' (số thứ tự: 39/75).
+2025-08-28 15:35:32 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.786, 14.1334) -> (108.7863861, 14.1066656).
+2025-08-28 15:35:32 - INFO - Tuyến đường 'Vĩnh Hảo - TTCMKV Vĩnh Thạnh' xử lý thành công.
+2025-08-28 15:35:32 - INFO - Đang xử lý tuyến đường: 'TTCMKV Tây Sơn - Bình An' (số thứ tự: 40/75).
+2025-08-28 15:35:35 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.9169228, 13.9080995) -> (108.96005, 13.932082).
+2025-08-28 15:35:35 - INFO - Tuyến đường 'TTCMKV Tây Sơn - Bình An' xử lý thành công.
+2025-08-28 15:35:35 - INFO - Đang xử lý tuyến đường: 'Bình An - Bình Hiệp' (số thứ tự: 41/75).
+2025-08-28 15:35:36 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.96005, 13.932082) -> (109.003474, 13.953058).
+2025-08-28 15:35:36 - INFO - Tuyến đường 'Bình An - Bình Hiệp' xử lý thành công.
+2025-08-28 15:35:36 - INFO - Đang xử lý tuyến đường: 'Bình Hiệp - Hội Sơn' (số thứ tự: 42/75).
+2025-08-28 15:35:37 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.003474, 13.953058) -> (108.9865642, 14.0748424).
+2025-08-28 15:35:37 - INFO - Tuyến đường 'Bình Hiệp - Hội Sơn' xử lý thành công.
+2025-08-28 15:35:37 - INFO - Đang xử lý tuyến đường: 'Hội Sơn - Hòa Hội' (số thứ tự: 43/75).
+2025-08-28 15:35:38 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.9865642, 14.0748424) -> (109.044427, 14.068528).
+2025-08-28 15:35:38 - INFO - Tuyến đường 'Hội Sơn - Hòa Hội' xử lý thành công.
+2025-08-28 15:35:38 - INFO - Đang xử lý tuyến đường: 'Hòa Hội - Phù Cát' (số thứ tự: 44/75).
+2025-08-28 15:35:40 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.044427, 14.068528) -> (109.061687, 13.982499).
+2025-08-28 15:35:40 - INFO - Tuyến đường 'Hòa Hội - Phù Cát' xử lý thành công.
+2025-08-28 15:35:40 - INFO - Đang xử lý tuyến đường: 'Phù Cát - Xuân An' (số thứ tự: 45/75).
+2025-08-28 15:35:41 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.061687, 13.982499) -> (109.105202, 13.97289).
+2025-08-28 15:35:41 - INFO - Tuyến đường 'Phù Cát - Xuân An' xử lý thành công.
+2025-08-28 15:35:41 - INFO - Đang xử lý tuyến đường: 'Xuân An - Ngô Mây' (số thứ tự: 46/75).
+2025-08-28 15:35:42 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.105202, 13.97289) -> (109.180038, 13.950502).
+2025-08-28 15:35:42 - INFO - Tuyến đường 'Xuân An - Ngô Mây' xử lý thành công.
+2025-08-28 15:35:42 - INFO - Đang xử lý tuyến đường: 'Ngô Mây - TTCMKV An Nhơn' (số thứ tự: 47/75).
+2025-08-28 15:35:42 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.180038, 13.950502) -> (109.1104821, 13.8868401).
+2025-08-28 15:35:42 - INFO - Tuyến đường 'Ngô Mây - TTCMKV An Nhơn' xử lý thành công.
+2025-08-28 15:35:42 - INFO - Đang xử lý tuyến đường: 'TTCMKV Phù Mỹ - Phù Mỹ' (số thứ tự: 48/75).
+2025-08-28 15:35:45 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.0462591, 14.1688339) -> (109.0462591, 14.1688339).
+2025-08-28 15:35:45 - INFO - Tuyến đường 'TTCMKV Phù Mỹ - Phù Mỹ' xử lý thành công.
+2025-08-28 15:35:45 - INFO - Đang xử lý tuyến đường: 'Phù Mỹ - Phù Mỹ Tây' (số thứ tự: 49/75).
+2025-08-28 15:35:46 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.0462591, 14.1688339) -> (109.072553, 14.306698).
+2025-08-28 15:35:46 - INFO - Tuyến đường 'Phù Mỹ - Phù Mỹ Tây' xử lý thành công.
+2025-08-28 15:35:46 - INFO - Đang xử lý tuyến đường: 'Phù Mỹ Tây - Phù Mỹ Đông' (số thứ tự: 50/75).
+2025-08-28 15:35:47 - WARNING - Lỗi 429: Too many requests. Đang thử lại sau 1.00 giây (lần 1/5).
+2025-08-28 15:35:49 - WARNING - Lỗi 429: Too many requests. Đang thử lại sau 2.00 giây (lần 2/5).
+2025-08-28 15:35:52 - WARNING - Lỗi 429: Too many requests. Đang thử lại sau 4.00 giây (lần 3/5).
+2025-08-28 15:35:57 - WARNING - Lỗi 429: Too many requests. Đang thử lại sau 8.00 giây (lần 4/5).
+2025-08-28 15:36:06 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.072553, 14.306698) -> (109.175116, 14.275469).
+2025-08-28 15:36:06 - INFO - Tuyến đường 'Phù Mỹ Tây - Phù Mỹ Đông' xử lý thành công.
+2025-08-28 15:36:06 - INFO - Đang xử lý tuyến đường: 'Phù Mỹ Đông - Bình Dương' (số thứ tự: 51/75).
+2025-08-28 15:36:07 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.175116, 14.275469) -> (109.0784274, 14.2945954).
+2025-08-28 15:36:07 - INFO - Tuyến đường 'Phù Mỹ Đông - Bình Dương' xử lý thành công.
+2025-08-28 15:36:07 - INFO - Đang xử lý tuyến đường: 'Bình Dương - Phù Mỹ Bắc' (số thứ tự: 52/75).
+2025-08-28 15:36:09 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.0784274, 14.2945954) -> (109.072553, 14.306698).
+2025-08-28 15:36:09 - INFO - Tuyến đường 'Bình Dương - Phù Mỹ Bắc' xử lý thành công.
+2025-08-28 15:36:09 - INFO - Đang xử lý tuyến đường: 'Phù Mỹ Bắc - TTCMKV Hoài Ân' (số thứ tự: 53/75).
+2025-08-28 15:36:10 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.072553, 14.306698) -> (108.968381, 14.3645246).
+2025-08-28 15:36:10 - INFO - Tuyến đường 'Phù Mỹ Bắc - TTCMKV Hoài Ân' xử lý thành công.
+2025-08-28 15:36:10 - INFO - Đang xử lý tuyến đường: 'TTCMKV Hoài Ân - Ân Tường' (số thứ tự: 54/75).
+2025-08-28 15:36:11 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.968381, 14.3645246) -> (108.917992, 14.31078).
+2025-08-28 15:36:11 - INFO - Tuyến đường 'TTCMKV Hoài Ân - Ân Tường' xử lý thành công.
+2025-08-28 15:36:11 - INFO - Đang xử lý tuyến đường: 'Ân Tường - Kim Sơn' (số thứ tự: 55/75).
+2025-08-28 15:36:13 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.917992, 14.31078) -> (108.895355, 14.285048).
+2025-08-28 15:36:13 - INFO - Tuyến đường 'Ân Tường - Kim Sơn' xử lý thành công.
+2025-08-28 15:36:13 - INFO - Đang xử lý tuyến đường: 'Kim Sơn - Hoài Ân' (số thứ tự: 56/75).
+2025-08-28 15:36:16 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.895355, 14.285048) -> (108.968381, 14.3645246).
+2025-08-28 15:36:16 - INFO - Tuyến đường 'Kim Sơn - Hoài Ân' xử lý thành công.
+2025-08-28 15:36:16 - INFO - Đang xử lý tuyến đường: 'Hoài Ân - Vạn Đức' (số thứ tự: 57/75).
+2025-08-28 15:36:18 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.968381, 14.3645246) -> (108.911152, 14.389351).
+2025-08-28 15:36:18 - INFO - Tuyến đường 'Hoài Ân - Vạn Đức' xử lý thành công.
+2025-08-28 15:36:18 - INFO - Đang xử lý tuyến đường: 'Vạn Đức - Ân Hảo' (số thứ tự: 58/75).
+2025-08-28 15:36:19 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.911152, 14.389351) -> (108.962723, 14.429453).
+2025-08-28 15:36:19 - INFO - Tuyến đường 'Vạn Đức - Ân Hảo' xử lý thành công.
+2025-08-28 15:36:19 - INFO - Đang xử lý tuyến đường: 'Ân Hảo - Bồng Sơn' (số thứ tự: 59/75).
+2025-08-28 15:36:21 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.962723, 14.429453) -> (109.0146977, 14.4317549).
+2025-08-28 15:36:21 - INFO - Tuyến đường 'Ân Hảo - Bồng Sơn' xử lý thành công.
+2025-08-28 15:36:21 - INFO - Đang xử lý tuyến đường: 'Bồng Sơn - TTCMKV Hoài Ân' (số thứ tự: 60/75).
+2025-08-28 15:36:24 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.0146977, 14.4317549) -> (108.968381, 14.3645246).
+2025-08-28 15:36:24 - INFO - Tuyến đường 'Bồng Sơn - TTCMKV Hoài Ân' xử lý thành công.
+2025-08-28 15:36:24 - INFO - Đang xử lý tuyến đường: 'TTCMKV Hoài Ân - Hoài Nhơn Nam' (số thứ tự: 61/75).
+2025-08-28 15:36:26 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.968381, 14.3645246) -> (109.042593, 14.451504).
+2025-08-28 15:36:26 - INFO - Tuyến đường 'TTCMKV Hoài Ân - Hoài Nhơn Nam' xử lý thành công.
+2025-08-28 15:36:26 - INFO - Đang xử lý tuyến đường: 'Hoài Nhơn Nam - Hoài Nhơn' (số thứ tự: 62/75).
+2025-08-28 15:36:27 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.042593, 14.451504) -> (109.056, 14.531667).
+2025-08-28 15:36:27 - INFO - Tuyến đường 'Hoài Nhơn Nam - Hoài Nhơn' xử lý thành công.
+2025-08-28 15:36:27 - INFO - Đang xử lý tuyến đường: 'Hoài Nhơn - Hoài Nhơn Tây' (số thứ tự: 63/75).
+2025-08-28 15:36:29 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.056, 14.531667) -> (109.004699, 14.54479).
+2025-08-28 15:36:29 - INFO - Tuyến đường 'Hoài Nhơn - Hoài Nhơn Tây' xử lý thành công.
+2025-08-28 15:36:29 - INFO - Đang xử lý tuyến đường: 'Hoài Nhơn Tây - Tam Quan' (số thứ tự: 64/75).
+2025-08-28 15:36:30 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.004699, 14.54479) -> (109.0428663, 14.5461651).
+2025-08-28 15:36:30 - INFO - Tuyến đường 'Hoài Nhơn Tây - Tam Quan' xử lý thành công.
+2025-08-28 15:36:30 - INFO - Đang xử lý tuyến đường: 'Tam Quan - Hoài Nhơn Bắc' (số thứ tự: 65/75).
+2025-08-28 15:36:31 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.0428663, 14.5461651) -> (109.0539431, 14.5584782).
+2025-08-28 15:36:31 - INFO - Tuyến đường 'Tam Quan - Hoài Nhơn Bắc' xử lý thành công.
+2025-08-28 15:36:31 - INFO - Đang xử lý tuyến đường: 'Hoài Nhơn Bắc - Hoài Nhơn Đông' (số thứ tự: 66/75).
+2025-08-28 15:36:33 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.0539431, 14.5584782) -> (109.086669, 14.486994).
+2025-08-28 15:36:33 - INFO - Tuyến đường 'Hoài Nhơn Bắc - Hoài Nhơn Đông' xử lý thành công.
+2025-08-28 15:36:33 - INFO - Đang xử lý tuyến đường: 'Hoài Nhơn Đông - TTCMKV Hoài Ân' (số thứ tự: 67/75).
+2025-08-28 15:36:36 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (109.086669, 14.486994) -> (108.968381, 14.3645246).
+2025-08-28 15:36:36 - INFO - Tuyến đường 'Hoài Nhơn Đông - TTCMKV Hoài Ân' xử lý thành công.
+2025-08-28 15:36:36 - INFO - Đang xử lý tuyến đường: 'TTCMKV Hoài Ân - An Vinh' (số thứ tự: 68/75).
+2025-08-28 15:36:42 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.968381, 14.3645246) -> (108.879318, 14.641889).
+2025-08-28 15:36:42 - INFO - Tuyến đường 'TTCMKV Hoài Ân - An Vinh' xử lý thành công.
+2025-08-28 15:36:42 - INFO - Đang xử lý tuyến đường: 'An Vinh - An Lão' (số thứ tự: 69/75).
+2025-08-28 15:36:43 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.879318, 14.641889) -> (108.8889668, 14.6083111).
+2025-08-28 15:36:43 - INFO - Tuyến đường 'An Vinh - An Lão' xử lý thành công.
+2025-08-28 15:36:43 - INFO - Đang xử lý tuyến đường: 'An Lão - An Hòa' (số thứ tự: 70/75).
+2025-08-28 15:36:45 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.8889668, 14.6083111) -> (108.9008589, 14.5577668).
+2025-08-28 15:36:45 - INFO - Tuyến đường 'An Lão - An Hòa' xử lý thành công.
+2025-08-28 15:36:45 - INFO - Đang xử lý tuyến đường: 'An Hòa - TTCMKV Hoài Ân' (số thứ tự: 71/75).
+2025-08-28 15:36:48 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.9008589, 14.5577668) -> (108.968381, 14.3645246).
+2025-08-28 15:36:48 - INFO - Tuyến đường 'An Hòa - TTCMKV Hoài Ân' xử lý thành công.
+2025-08-28 15:36:48 - INFO - Đang xử lý tuyến đường: 'TTCMKV Hoài Ân - Ân Hảo Tây' (số thứ tự: 72/75).
+2025-08-28 15:36:50 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.968381, 14.3645246) -> (108.96319, 14.42949).
+2025-08-28 15:36:50 - INFO - Tuyến đường 'TTCMKV Hoài Ân - Ân Hảo Tây' xử lý thành công.
+2025-08-28 15:36:50 - INFO - Đang xử lý tuyến đường: 'Ân Hảo Tây - An Toàn' (số thứ tự: 73/75).
+2025-08-28 15:36:52 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.96319, 14.42949) -> (108.7282301, 14.5339535).
+2025-08-28 15:36:52 - INFO - Tuyến đường 'Ân Hảo Tây - An Toàn' xử lý thành công.
+2025-08-28 15:36:52 - INFO - Đang xử lý tuyến đường: 'An Toàn - An Quang' (số thứ tự: 74/75).
+2025-08-28 15:36:55 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.7282301, 14.5339535) -> (108.876328, 14.541225).
+2025-08-28 15:36:55 - INFO - Tuyến đường 'An Toàn - An Quang' xử lý thành công.
+2025-08-28 15:36:55 - INFO - Đang xử lý tuyến đường: 'An Quang - TTCMKV Hoài Ân' (số thứ tự: 75/75).
+2025-08-28 15:36:56 - WARNING - Lỗi 429: Too many requests. Đang thử lại sau 1.00 giây (lần 1/5).
+2025-08-28 15:37:00 - INFO - API Openrouteservice: Lấy dữ liệu thành công cho (108.876328, 14.541225) -> (108.968381, 14.3645246).
+2025-08-28 15:37:00 - INFO - Tuyến đường 'An Quang - TTCMKV Hoài Ân' xử lý thành công.
+2025-08-28 15:37:00 - INFO - Tạo chuỗi KML thành công.
+2025-08-28 15:37:00 - INFO - Ghi file KML thành công vào 'test_route_kml_tmp.kml'.
