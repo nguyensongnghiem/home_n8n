@@ -1,54 +1,51 @@
+# File: docker-compose.yml (đã sửa để expose port ra host)
 version: '3.8'
 
 services:
   n8n:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: n8n_app # Đặt tên container rõ ràng hơn
+    build: .
+    container_name: n8n_app
     restart: always
+    # KHÔNG CÒN BÌNH LUẬN NỮA: Mở cổng 5678 của container ra cổng 5678 của host.
     ports:
-      - "5678:5678"
-    environment:
-      - DB_TYPE=postgresdb
-      - DB_POSTGRESDB_HOST=postgres
-      - DB_POSTGRESDB_PORT=5432
-      - DB_POSTGRESDB_DATABASE=n8n_db
-      - DB_POSTGRESDB_USER=${DB_POSTGRESDB_USER}
-      - DB_POSTGRESDB_PASSWORD=${DB_POSTGRESDB_PASSWORD}
-      - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER}
-      - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD}
-      - N8N_PROTOCOL=https
-      - N8N_HOST=${N8N_HOST}
-      - WEBHOOK_URL=${WEBHOOK_URL}
-      - NODE_ENV=production
+      - '5678:5678'
+
     volumes:
-      - ./n8n_data:/home/node/.n8n
-      # Nếu bạn dùng scripts, hãy uncomment và đảm bảo ./scripts tồn tại
-      # - ./scripts:/app/scripts
-    depends_on:
-      - postgres
-    networks:
-      - n8n_network
+      - n8n_data:/home/node/.n8n
+      # Nếu các script Python của bạn được mount, hãy thêm dòng này
+      # - ./scripts:/usr/src/app/scripts
+
+    environment:
+      # --- Cấu hình cho Reverse Proxy trên Host ---
+      # Lưu ý: Các biến này không còn quan trọng như khi dùng mạng nội bộ,
+      # vì Nginx sẽ xử lý thông qua cổng host. Bạn có thể giữ hoặc chỉnh sửa nếu cần.
+      - N8N_PROTOCOL=https
+      - WEBHOOK_URL=https://n8n.digithub.io.vn/
+
+      - N8N_PORT=5678
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER:-user}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD:-password}
+
+      # Các API keys khác của bạn
+      - OPENROUTE_API_KEY=${OPENROUTE_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - DISCORD_API_KEY=${DISCORD_API_KEY}
+      - NGROK_PUBLIC_URL=${NGROK_PUBLIC_URL:-}
 
   postgres:
     image: postgres:15-alpine
-    container_name: n8n_db_postgres # Đặt tên container rõ ràng cho DB
+    container_name: n8n_db_postgres
     restart: always
     environment:
       - POSTGRES_DB=n8n_db
       - POSTGRES_USER=${DB_POSTGRESDB_USER}
       - POSTGRES_PASSWORD=${DB_POSTGRESDB_PASSWORD}
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
-    networks:
-      - n8n_network
+      - postgres_data:/var/lib/postgresql/data
 
-networks:
-  n8n_network:
-    driver: bridge
+# Loại bỏ định nghĩa mạng chung (external network)
 
 volumes:
   n8n_data:
-  postgres_data: # Bạn có thể thêm tên volume này ở đây để Docker quản lý nó
+  postgres_data:
