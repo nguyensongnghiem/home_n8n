@@ -310,7 +310,18 @@ if __name__ == "__main__":
         try:
             with open(args.input_file,'r',encoding='utf-8') as f:
                 data_from_file = json.load(f)
-            routes_to_process = data_from_file if isinstance(data_from_file, list) else data_from_file.get("rawData",[])
+            if isinstance(data_from_file, list):
+                # Dạng chuẩn của bạn: [ { rawData: [...] } ]
+                if len(data_from_file) > 0 and isinstance(data_from_file[0], dict):
+                    routes_to_process = data_from_file[0].get("rawData", [])
+                else:
+                    logger.error("JSON dạng list nhưng không đúng cấu trúc mong đợi.")
+                    sys.exit(1)
+            elif isinstance(data_from_file, dict):
+                routes_to_process = data_from_file.get("rawData", [])
+            else:
+                logger.error("JSON không đúng cấu trúc.")
+                sys.exit(1)
         except Exception as e:
             logger.exception(f"Lỗi đọc file JSON: {e}")
             sys.exit(1)
@@ -355,18 +366,71 @@ if __name__ == "__main__":
             processed_excel_data.append({**route, 'Distance (km)': 'N/A', 'Status': 'Lỗi API / Không có route'})
 
     # --- Tạo KML ---
+    kml_file_path = None
+    kml_status = "error"
+    kml_message = "Không có tuyến đường nào được xử lý thành công để tạo KML."
+
     kml_content = create_kml(all_routes_data, logger=logger)
     if kml_content:
         try:
+            output_dir = os.path.dirname(args.output_kml)
+            if output_dir:
+                os.makedirs(output_dir, exist_ok=True)
             with open(args.output_kml,'w',encoding='utf-8') as f:
                 f.write(kml_content)
             logger.info(f"KML lưu thành công: {args.output_kml}")
+            kml_file_path = args.output_kml
+            kml_status = "success"
+            kml_message = f"Tạo file KML thành công chứa {len(all_routes_data)} tuyến đường."
         except Exception as e:
             logger.exception(f"Lỗi ghi KML: {e}")
+            kml_message = f"Không thể ghi vào file KML '{args.output_kml}': {e}"
     else:
-        logger.warning("Không tạo được KML (không có tuyến hợp lệ).")
+        logger.warning("Không tạo được KML (không có tuyến hợp lệ hoặc lỗi nội dung).")
+        kml_message = "Không thể tạo nội dung KML từ dữ liệu đã xử lý."
 
     # --- Tạo Excel ---
-    create_excel(routes_to_process, processed_excel_data, args.output_excel, logger=logger)
+    excel_file_path = None
+    excel_status = "error"
+    excel_message = "Không có dữ liệu đầu vào để tạo file Excel."
+
+    if routes_to_process:
+        if create_excel(routes_to_process, processed_excel_data, args.output_excel, logger=logger):
+            excel_file_path = args.output_excel
+            excel_status = "success"
+            excel_message = f"Tạo file Excel đầu ra thành công tại: '{args.output_excel}'."
+        else:
+            excel_message = f"Lỗi khi ghi file Excel đầu ra: '{args.output_excel}'."
+    else:
+    # create_excel(routes_to_process, processed_excel_data, args.output_excel, logger=logger)
+        logger.warning("Không có dữ liệu đầu vào để tạo file Excel.")
+
+    # --- Final JSON Output ---
+    overall_status = "success"
+    overall_message = []
+
+    if kml_status == "success":
+        overall_message.append(kml_message)
+    else:
+        overall_status = "error"
+        overall_message.append(f"KML Error: {kml_message}")
+
+    if excel_status == "success":
+        overall_message.append(excel_message)
+    else:
+        overall_status = "error"
+        overall_message.append(f"Excel Error: {excel_message}")
+
+    result = {
+        "status": overall_status,
+        "kml_file_path": kml_file_path,
+        "excel_file_path": excel_file_path,
+        "message": " ".join(overall_message)
+    }
+
+    print(json.dumps(result, indent=2, ensure_ascii=False))
+
+    if overall_status == "error":
+        sys.exit(1)
 
     logger.info("Chương trình kết thúc.")

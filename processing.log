@@ -1,0 +1,28 @@
+2025-11-20 21:03:26 - INFO - Bắt đầu chương trình
+2025-11-20 21:03:26 - INFO - Xử lý tuyến: CA Công an tỉnh - Quy Nhơn Nam
+2025-11-20 21:03:28 - INFO - API OK: (109.2254849, 13.7693908) -> (109.207684, 13.755567) (4.32 km)
+2025-11-20 21:03:28 - INFO - Xử lý tuyến: Quy Nhơn Nam - Quy Nhơn
+2025-11-20 21:03:29 - INFO - API OK: (109.207684, 13.755567) -> (109.2245955, 13.7656499) (2.84 km)
+2025-11-20 21:03:29 - INFO - Xử lý tuyến: Quy Nhơn - Quy Nhơn Bắc
+2025-11-20 21:03:30 - INFO - API OK: (109.2245955, 13.7656499) -> (109.1482887, 13.786033) (12.00 km)
+2025-11-20 21:03:30 - INFO - Xử lý tuyến: Quy Nhơn Bắc - TTCMKV An Nhơn
+2025-11-20 21:03:31 - INFO - API OK: (109.1482887, 13.786033) -> (109.1104821, 13.8868401) (12.93 km)
+2025-11-20 21:03:31 - INFO - Xử lý tuyến: TTCMKV Vân Canh - Vân Canh
+2025-11-20 21:03:31 - WARNING - Tọa độ trùng nhau cho tuyến 'TTCMKV Vân Canh - Vân Canh', bỏ qua (Không tạo KML).
+2025-11-20 21:03:31 - INFO - KML lưu thành công: routes_output.kml
+2025-11-20 21:03:31 - INFO - Excel lưu thành công: ./output/a.xlsx
+2025-11-20 21:03:31 - INFO - Chương trình kết thúc.
+2025-11-20 21:30:36 - INFO - Bắt đầu chương trình
+2025-11-20 21:30:36 - INFO - Xử lý tuyến: CA Công an tỉnh - Quy Nhơn Nam
+2025-11-20 21:30:42 - INFO - API OK: (109.2254849, 13.7693908) -> (109.207684, 13.755567) (4.32 km)
+2025-11-20 21:30:42 - INFO - Xử lý tuyến: Quy Nhơn Nam - Quy Nhơn
+2025-11-20 21:30:43 - INFO - API OK: (109.207684, 13.755567) -> (109.2245955, 13.7656499) (2.84 km)
+2025-11-20 21:30:43 - INFO - Xử lý tuyến: Quy Nhơn - Quy Nhơn Bắc
+2025-11-20 21:30:44 - INFO - API OK: (109.2245955, 13.7656499) -> (109.1482887, 13.786033) (12.00 km)
+2025-11-20 21:30:44 - INFO - Xử lý tuyến: Quy Nhơn Bắc - TTCMKV An Nhơn
+2025-11-20 21:30:45 - INFO - API OK: (109.1482887, 13.786033) -> (109.1104821, 13.8868401) (12.93 km)
+2025-11-20 21:30:45 - INFO - Xử lý tuyến: TTCMKV Vân Canh - Vân Canh
+2025-11-20 21:30:45 - WARNING - Tọa độ trùng nhau cho tuyến 'TTCMKV Vân Canh - Vân Canh', bỏ qua (Không tạo KML).
+2025-11-20 21:30:45 - INFO - KML lưu thành công: routes_output.kml
+2025-11-20 21:30:45 - INFO - Excel lưu thành công: ./output/b.xlsx
+2025-11-20 21:30:45 - INFO - Chương trình kết thúc.
