@@ -61,7 +61,79 @@ def get_or_create_folder(kml_root, folder_names, created_folders):
         current = created_folders[path]
     return current
 
+
 # ------------------- API Route -------------------
+def get_osrm_route(osrm_base_url, start_coords, end_coords, profile="car", max_retries=5, logger=None):
+    """
+    Lấy route từ OSRM local server.
+    start_coords, end_coords: (lon, lat)
+    Trả về (coords_list, distance_km)
+    """
+    if start_coords == end_coords:
+        if logger:
+            logger.warning(f"Tọa độ trùng nhau, bỏ qua route: {start_coords} -> {end_coords}")
+        return None, None
+
+    lon1, lat1 = start_coords
+    lon2, lat2 = end_coords
+
+    url = f"{osrm_base_url}/route/v1/{profile}/{lon1},{lat1};{lon2},{lat2}?overview=full&geometries=geojson"
+
+    for attempt in range(max_retries):
+        try:
+            response = requests.get(url, timeout=20)
+            response.raise_for_status()
+            data = response.json()
+
+            # Kiểm tra OSRM trả về OK
+            if data.get("code") != "Ok":
+                if logger:
+                    logger.error(f"OSRM trả về lỗi: {data.get('code')}")
+                return None, None
+
+            routes = data.get("routes")
+            if not routes:
+                if logger:
+                    logger.warning("OSRM không trả về routes")
+                return None, None
+
+            route = routes[0]
+
+            # Lấy distance
+            distance_m = route.get("distance")
+            if distance_m is None:
+                if logger:
+                    logger.warning("OSRM không trả về distance")
+                return None, None
+
+            distance_km = distance_m / 1000
+
+            # Lấy hình dạng tuyến (GeoJSON)
+            geometry = route.get("geometry", {})
+            coords_raw = geometry.get("coordinates", [])
+
+            if not coords_raw:
+                if logger:
+                    logger.warning("OSRM không có geometry")
+                return None, None
+
+            coords = [tuple(pt) for pt in coords_raw]
+
+            if logger:
+                logger.info(f"OSRM OK: {start_coords} -> {end_coords} ({distance_km:.2f} km)")
+
+            return coords, distance_km
+
+        except requests.exceptions.RequestException as e:
+            if logger:
+                logger.error(f"Lỗi khi gọi OSRM: {e}. Attempt {attempt+1}/{max_retries}")
+            time.sleep(1)
+
+    if logger:
+        logger.error(f"Thử tối đa {max_retries} lần nhưng OSRM vẫn lỗi")
+
+    return None, None
+
 def get_ors_route(api_key, start_coords, end_coords, profile="driving-car", max_retries=5, logger=None):
     """
     Trả về (coords_list, distance_km) hoặc (None, None) nếu không có route.
@@ -209,6 +281,7 @@ def create_excel(original_data, processed_data, output_file, logger=None):
 # ------------------- Main -------------------
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Tạo KML + Excel từ dữ liệu tuyến đường Openrouteservice")
+    parser.add_argument('--osrm-url', type=str, default='http://osrm.digithub.io.vn', help="URL server OSRM")
     parser.add_argument('--input-file', type=str, help="File JSON đầu vào")
     parser.add_argument('--api-key', type=str, required=True, help="API Key ORS")
     parser.add_argument('--profile', type=str, default='driving-car')
@@ -355,8 +428,9 @@ if __name__ == "__main__":
 
         start_coords = (lon1, lat1)
         end_coords = (lon2, lat2)
-
-        coords, distance_km = get_ors_route(args.api_key, start_coords, end_coords, args.profile, logger=logger)
+        # gọi ORS API
+        # coords, distance_km = get_ors_route(args.api_key, start_coords, end_coords, args.profile, logger=logger)   # Sử dụng ORS miễn phí 
+        coords, distance_km = get_osrm_route(args.osrm_url,start_coords,end_coords,profile="car",logger=logger) # Sử dụng OSRM private server
         request_timestamps.append(time.time())
 
         if coords and distance_km is not None:
