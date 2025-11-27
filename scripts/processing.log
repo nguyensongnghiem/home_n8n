@@ -281,3 +281,45 @@
 2025-11-21 10:58:19 - INFO - KML lưu thành công: test_route_kml_tmp.kml
 2025-11-21 10:58:19 - INFO - Excel lưu thành công: routes_result.xlsx
 2025-11-21 10:58:19 - INFO - Chương trình kết thúc.
+2025-11-21 11:31:30 - INFO - Bắt đầu chương trình
+2025-11-21 11:31:30 - INFO - Xử lý tuyến: CA Công an tỉnh - Quy Nhơn Nam
+2025-11-21 11:31:31 - INFO - OSRM OK: (109.2254849, 13.7693908) -> (109.207684, 13.755567) (3.74 km)
+2025-11-21 11:31:31 - INFO - Xử lý tuyến: Quy Nhơn Nam - Quy Nhơn
+2025-11-21 11:31:31 - INFO - OSRM OK: (109.207684, 13.755567) -> (109.2245955, 13.7656499) (2.83 km)
+2025-11-21 11:31:31 - INFO - Xử lý tuyến: Quy Nhơn - Quy Nhơn Bắc
+2025-11-21 11:31:31 - INFO - OSRM OK: (109.2245955, 13.7656499) -> (109.1482887, 13.786033) (11.98 km)
+2025-11-21 11:31:31 - INFO - Xử lý tuyến: Quy Nhơn Bắc - TTCMKV An Nhơn
+2025-11-21 11:31:31 - INFO - OSRM OK: (109.1482887, 13.786033) -> (109.1104821, 13.8868401) (12.88 km)
+2025-11-21 11:31:31 - INFO - Xử lý tuyến: TTCMKV Vân Canh - Vân Canh
+2025-11-21 11:31:31 - WARNING - Tọa độ trùng nhau cho tuyến 'TTCMKV Vân Canh - Vân Canh', bỏ qua (Không tạo KML).
+2025-11-21 11:31:31 - INFO - KML lưu thành công: test_route_kml_tmp.kml
+2025-11-21 11:31:31 - INFO - Excel lưu thành công: routes_result.xlsx
+2025-11-21 11:31:31 - INFO - Chương trình kết thúc.
+2025-11-21 13:04:46 - INFO - Bắt đầu chương trình
+2025-11-21 13:04:46 - INFO - Xử lý tuyến: CA Công an tỉnh - Quy Nhơn Nam
+2025-11-21 13:04:46 - INFO - OSRM OK: (109.2254849, 13.7693908) -> (109.207684, 13.755567) (3.74 km)
+2025-11-21 13:04:46 - INFO - Xử lý tuyến: Quy Nhơn Nam - Quy Nhơn
+2025-11-21 13:04:46 - INFO - OSRM OK: (109.207684, 13.755567) -> (109.2245955, 13.7656499) (2.83 km)
+2025-11-21 13:04:46 - INFO - Xử lý tuyến: Quy Nhơn - Quy Nhơn Bắc
+2025-11-21 13:04:46 - INFO - OSRM OK: (109.2245955, 13.7656499) -> (109.1482887, 13.786033) (11.98 km)
+2025-11-21 13:04:46 - INFO - Xử lý tuyến: Quy Nhơn Bắc - TTCMKV An Nhơn
+2025-11-21 13:04:46 - INFO - OSRM OK: (109.1482887, 13.786033) -> (109.1104821, 13.8868401) (12.88 km)
+2025-11-21 13:04:47 - INFO - Xử lý tuyến: TTCMKV Vân Canh - Vân Canh
+2025-11-21 13:04:47 - WARNING - Tọa độ trùng nhau cho tuyến 'TTCMKV Vân Canh - Vân Canh', bỏ qua (Không tạo KML).
+2025-11-21 13:04:47 - INFO - KML lưu thành công: routes_output.kml
+2025-11-21 13:04:47 - INFO - Excel lưu thành công: routes_result.xlsx
+2025-11-21 13:04:47 - INFO - Chương trình kết thúc.
+2025-11-21 13:23:06 - INFO - Bắt đầu chương trình
+2025-11-21 13:23:06 - INFO - Xử lý tuyến: CA Công an tỉnh - Quy Nhơn Nam
+2025-11-21 13:23:18 - INFO - OSRM OK: (109.2254849, 13.7693908) -> (109.207684, 13.755567) (3.74 km)
+2025-11-21 13:23:18 - INFO - Xử lý tuyến: Quy Nhơn Nam - Quy Nhơn
+2025-11-21 13:23:18 - INFO - OSRM OK: (109.207684, 13.755567) -> (109.2245955, 13.7656499) (2.83 km)
+2025-11-21 13:23:18 - INFO - Xử lý tuyến: Quy Nhơn - Quy Nhơn Bắc
+2025-11-21 13:23:18 - INFO - OSRM OK: (109.2245955, 13.7656499) -> (109.1482887, 13.786033) (11.98 km)
+2025-11-21 13:23:18 - INFO - Xử lý tuyến: Quy Nhơn Bắc - TTCMKV An Nhơn
+2025-11-21 13:23:18 - INFO - OSRM OK: (109.1482887, 13.786033) -> (109.1104821, 13.8868401) (12.88 km)
+2025-11-21 13:23:18 - INFO - Xử lý tuyến: TTCMKV Vân Canh - Vân Canh
+2025-11-21 13:23:18 - WARNING - Tọa độ trùng nhau cho tuyến 'TTCMKV Vân Canh - Vân Canh', bỏ qua (Không tạo KML).
+2025-11-21 13:23:18 - INFO - KML lưu thành công: routes_output.kml
+2025-11-21 13:23:18 - INFO - Excel lưu thành công: routes_result.xlsx
+2025-11-21 13:23:18 - INFO - Chương trình kết thúc.

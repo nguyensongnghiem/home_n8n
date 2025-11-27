@@ -233,3 +233,147 @@ if __name__ == "__main__":
 		result = {"status": "error", "message": "Không thể tạo nội dung KML từ dữ liệu đã xử lý."}
 		print(json.dumps(result))
 		sys.exit(1)
+# --- BỔ SUNG CÁC HÀM TẠO KML ---
+
+# Hàm tạo một placemark cho điểm
+def _create_point_placemark(site_name, lat, lon, description, icon_url, icon_scale):
+    """Hàm nội bộ tạo Style và Placemark KML cho một điểm."""
+    def format_coord(lon, lat):
+        return f"{lon},{lat},0" # Altitude is 0 for points unless specified
+
+    # Tối ưu hóa Style ID
+    safe_name = site_name.replace(' ', '_').replace('.', '').replace('/', '_')
+    style_id = f"pointStyle_{safe_name}_{abs(int(lon*1000))}_{abs(int(lat*1000))}"
+    
+    style_kml = f"""
+    <Style id="{style_id}">
+      <IconStyle>
+        <scale>{icon_scale}</scale>
+        <Icon>
+          <href>{icon_url}</href>
+        </Icon>
+      </IconStyle>
+    </Style>"""
+
+    description_kml = f"<description>{description}</description>" if description else ""
+
+    placemark_kml = f"""
+    <Placemark>
+      <name>{site_name}</name>
+      {description_kml}
+      <styleUrl>#{style_id}</styleUrl>
+      <Point>
+        <coordinates>
+          {format_coord(lon, lat)}
+        </coordinates>
+      </Point>
+    </Placemark>"""
+
+    return style_kml, placemark_kml
+
+# Hàm đệ quy tạo KML cho các thư mục
+def _generate_folder_kml_recursive(current_folder_node):
+    """Hàm nội bộ tạo KML từ cấu trúc cây thư mục đệ quy."""
+    content = []
+
+    # 1. Thêm các placemark trực tiếp
+    content.extend(current_folder_node.get('placemarks', []))
+
+    # 2. Duyệt và gọi đệ quy cho các thư mục con
+    subfolders_dict = current_folder_node.get('subfolders', {})
+    sorted_subfolder_names = sorted(subfolders_dict.keys())
+
+    for subfolder_name in sorted_subfolder_names:
+        subfolder_node = subfolders_dict[subfolder_name]
+        subfolder_kml_content = _generate_folder_kml_recursive(subfolder_node)
+        
+        # Gói nội dung thư mục con vào thẻ <Folder>
+        if subfolder_kml_content:
+            folder_kml = f"""
+    <Folder>
+      <name>{subfolder_name}</name>
+      {subfolder_kml_content}
+    </Folder>"""
+            content.append(folder_kml)
+    
+    return "".join(content)
+
+# Hàm chính tạo KML (thay thế generate_kml_from_sites)
+def generate_kml_for_points(items_to_process, doc_name="Site/Point KML"):
+    """
+    Tạo nội dung KML hoàn chỉnh dưới dạng chuỗi từ danh sách các điểm.
+    Hỗ trợ nhóm 3 cấp thư mục.
+    """
+    all_styles = []
+    grouped_placemarks = {'placemarks': [], 'subfolders': {}} 
+    has_valid_data = False
+
+    for i, data_item in enumerate(items_to_process):
+        site_name = data_item.get("SiteName", f"Điểm {i+1}")
+        try:
+            # Lấy và chuyển đổi các khóa
+            lat = float(data_item["Latitude"])
+            lon = float(data_item["Longitude"])
+            icon_url = str(data_item["Icon"])
+            icon_scale = float(data_item.get("IconScale", 1.0))
+            description = str(data_item.get("Description", "")).strip()
+            folder_name = str(data_item.get("FolderName", "")).strip()
+            second_folder_name = str(data_item.get("SecondFolderName", "")).strip()
+            third_folder_name = str(data_item.get("ThirdFolderName", "")).strip()
+
+            style_kml, placemark_kml = _create_point_placemark(site_name, lat, lon, description, icon_url, icon_scale)
+            all_styles.append(style_kml)
+
+            # Logic nhóm 3 cấp thư mục
+            current_level_node = grouped_placemarks
+            
+            # Cấp 1
+            if folder_name:
+                if folder_name not in current_level_node['subfolders']:
+                    current_level_node['subfolders'][folder_name] = {'placemarks': [], 'subfolders': {}}
+                current_level_node = current_level_node['subfolders'][folder_name]
+
+                # Cấp 2
+                if second_folder_name:
+                    if second_folder_name not in current_level_node['subfolders']:
+                        current_level_node['subfolders'][second_folder_name] = {'placemarks': [], 'subfolders': {}}
+                    current_level_node = current_level_node['subfolders'][second_folder_name]
+
+                    # Cấp 3
+                    if third_folder_name:
+                        if third_folder_name not in current_level_node['subfolders']:
+                            current_level_node['subfolders'][third_folder_name] = {'placemarks': [], 'subfolders': {}}
+                        current_level_node = current_level_node['subfolders'][third_folder_name]
+            
+            # Thêm placemark vào node đích
+            current_level_node['placemarks'].append(placemark_kml)
+            has_valid_data = True
+
+        except (ValueError, TypeError) as e:
+            print(f"[LOG]: Lỗi chuyển đổi kiểu dữ liệu cho '{site_name}' (hàng {i+1}): {e}. Bỏ qua.", file=sys.stderr)
+            continue
+        except KeyError as e:
+            print(f"[LOG]: Lỗi: Thiếu khóa bắt buộc {e} cho '{site_name}' (hàng {i+1}). Bỏ qua.", file=sys.stderr)
+            continue
+        except Exception as e:
+            print(f"[LOG]: Đã xảy ra lỗi không mong muốn khi xử lý '{site_name}' (hàng {i+1}): {e}.", file=sys.stderr)
+            continue
+
+    if not has_valid_data:
+        return None
+
+    # Tạo nội dung KML cuối cùng
+    unique_styles = sorted(list(set(all_styles)))
+    styles_combined = "".join(unique_styles)
+    placemarks_combined_in_folders = _generate_folder_kml_recursive(grouped_placemarks)
+
+    full_kml_content = f"""<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>{doc_name}</name>
+    {styles_combined}
+    {placemarks_combined_in_folders}
+  </Document>
+</kml>
+"""
+    return full_kml_content
