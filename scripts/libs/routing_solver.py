@@ -12,7 +12,7 @@ except ImportError:
     sys.exit(1)
 
 # Định nghĩa kiểu dữ liệu cho router để dễ đọc: (Tên, Lon, Lat)
-RouterData = Tuple[str, float, float]
+RouterData = Tuple[str, float, float, str, int, str]
 Coords = Tuple[float, float]
 
 def find_nearest_router_by_osrm_route(
@@ -109,7 +109,7 @@ def find_nearest_router_by_osrm_route_table(
     start_coords: Coords = (target_bs_lon, target_bs_lat)
     
     # Trích xuất tọa độ đích (lon, lat) từ danh sách Router đã lọc
-    dest_coords_list = [(lon, lat) for name, lon, lat in routers_list]
+    dest_coords_list = [(lon, lat) for _, lon, lat,_,_,_ in routers_list]
     
     print(f"Bắt đầu gọi OSRM /table cho {len(routers_list)} router...")
 
@@ -137,12 +137,15 @@ def find_nearest_router_by_osrm_route_table(
             min_distance = distance_km
             
             # Lấy thông tin chi tiết của router tương ứng từ danh sách đã lọc
-            router_name, router_lon, router_lat = routers_list[i]
+            router_name, router_lon, router_lat,router_type, router_priority, router_site_id = routers_list[i]
             
             best_router_result = {
                 'name': router_name,
                 'lat': router_lat,
                 'lon': router_lon,
+                'type' : router_type,
+                'priority' : router_priority,
+                'site_id' : router_site_id,
                 'distance_km': distance_km
             }
 
