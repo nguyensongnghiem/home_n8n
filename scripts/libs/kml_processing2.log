@@ -1,0 +1,10 @@
+2025-11-29 21:52:19 - ERROR - Hàng 2 ('Lỗi Phẩy'): Lỗi chuyển đổi số cho Tọa độ (Lat: '10,76', Lon: '106.66'). Kiểm tra dấu thập phân (phải là dấu chấm '.'). Bỏ qua.
+2025-11-29 21:52:19 - ERROR - Hàng 3 ('Lỗi Thiếu Icon'): Thiếu khóa bắt buộc 'Icon'. Bỏ qua.
+2025-11-29 22:02:11 - INFO - --- THỬ NGHIỆM GHI LOG ---
+2025-11-29 22:02:11 - INFO - Kiểm tra file log: kml_processing.log (sẽ được tạo bên cạnh file script này)
+2025-11-29 22:02:11 - ERROR - Hàng 2 ('Lỗi Phẩy'): Lỗi chuyển đổi số cho Tọa độ (Lat: '10,76', Lon: '106.66'). Kiểm tra dấu thập phân (phải là dấu chấm '.'). Bỏ qua.
+2025-11-29 22:02:11 - ERROR - Hàng 3 ('Lỗi Thiếu Icon'): Thiếu khóa bắt buộc 'Icon'. Bỏ qua.
+2025-11-29 22:05:40 - INFO - --- THỬ NGHIỆM GHI LOG ---
+2025-11-29 22:05:40 - INFO - Kiểm tra file log: kml_processing.log (sẽ được tạo bên cạnh file script này)
+2025-11-29 22:05:40 - ERROR - Hàng 2 ('Lỗi Phẩy'): Lỗi chuyển đổi số cho Tọa độ (Lat: '10,76', Lon: '106.66'). Kiểm tra dấu thập phân (phải là dấu chấm '.'). Bỏ qua.
+2025-11-29 22:05:40 - ERROR - Hàng 3 ('Lỗi Thiếu Icon'): Thiếu khóa bắt buộc 'Icon'. Bỏ qua.
