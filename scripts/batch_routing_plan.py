@@ -129,9 +129,8 @@ def filter_routers_by_radius(
             filtered_list.append(router_data) # Lưu lại tuple đầy đủ
             
     return filtered_list
-
 # =================================================================
-# 3. HÀM GHI KẾT QUẢ RA CSV (ĐÃ THÊM CÁC CỘT THÔNG TIN ROUTER)
+# 3. HÀM GHI KẾT QUẢ RA CSV (ĐÃ SỬA LỖI ENCODING)
 # =================================================================
 def write_results_to_csv(output_path: str, results: List[Dict[str, Any]]):
     """Ghi danh sách kết quả (Dictionary) ra file CSV."""
@@ -139,22 +138,55 @@ def write_results_to_csv(output_path: str, results: List[Dict[str, Any]]):
         logger.warning("Không có kết quả nào để ghi ra file CSV.")
         return
 
-    # SỬA LỖI: Thêm các headers mới vào file kết quả
+    # Sửa lỗi: Thêm các headers mới vào file kết quả
     fieldnames = [
         'BS_Name', 'BS_Lat', 'BS_Lon', 
         'Nearest_Router_Name', 'Nearest_Router_Lat', 'Nearest_Router_Lon',
-        'Router_Type', 'Router_Priority', 'Router_Site_ID', # <--- ĐÃ THÊM
+        'Router_Type', 'Router_Priority', 'Router_Site_ID',
         'Route_Distance_KM', 'Status'
     ]
     
     try:
-        with open(output_path, 'w', newline='', encoding='utf-8') as csvfile:
+        # ❗ SỬA LỖI TẠI ĐÂY: Thay 'utf-8' bằng 'utf-8-sig' để hỗ trợ tiếng Việt trên Excel
+        with open(output_path, 'w', newline='', encoding='utf-8-sig') as csvfile: 
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(results)
         logger.info(f"✅ Đã ghi thành công {len(results)} kết quả vào file: {output_path}")
     except Exception as e:
         logger.error(f"Lỗi khi ghi file CSV: {e}")
+# =================================================================
+# 3. HÀM GHI KẾT QUẢ RA EXCEL (.XLSX)
+# =================================================================
+def write_results_to_excel(output_path: str, results: List[Dict[str, Any]]):
+    """Ghi danh sách kết quả (Dictionary) ra file Excel (.xlsx)."""
+    if not results:
+        logger.warning("Không có kết quả nào để ghi ra file Excel.")
+        return
+
+    # 1. Tạo DataFrame từ list of dictionaries
+    df = pd.DataFrame(results)
+
+    # 2. Đổi tên cột (đảm bảo đúng thứ tự nếu cần)
+    df = df[[
+        'BS_Name', 'BS_Lat', 'BS_Lon', 
+        'Nearest_Router_Name', 'Nearest_Router_Lat', 'Nearest_Router_Lon',
+        'Router_Type', 'Router_Priority', 'Router_Site_ID', 
+        'Route_Distance_KM', 'Status'
+    ]]
+    
+    # Đảm bảo đường dẫn kết thúc bằng .xlsx
+    if not output_path.lower().endswith('.xlsx'):
+        output_path = os.path.splitext(output_path)[0] + '.xlsx'
+
+    try:
+        # Ghi ra file Excel. Pandas và openpyxl xử lý Unicode/tiếng Việt tự động.
+        df.to_excel(output_path, index=False, sheet_name='Routing_Results')
+        logger.info(f"✅ Đã ghi thành công {len(results)} kết quả vào file EXCEL: {output_path}")
+    except ImportError:
+        logger.error("Lỗi: Không tìm thấy thư viện 'openpyxl'. Vui lòng chạy: pip install openpyxl")
+    except Exception as e:
+        logger.error(f"Lỗi khi ghi file Excel: {e}")
 
 # =================================================================
 # 4. HÀM CHÍNH (MAIN BATCH PROCESS - ĐÃ SỬA LỖI GỌI HÀM)
@@ -169,7 +201,7 @@ def main():
     parser.add_argument('--router-csv', type=str, required=True, help='Đường dẫn file CSV chứa danh sách Router (Name, Lat, Lon, Type, Priority, Site ID).') # THÔNG TIN THÊM
     parser.add_argument('--output-csv', type=str, default='routing_results.csv', help='Tên file CSV kết quả đầu ra.')
     parser.add_argument('--profile', type=str, default='car', help='Chế độ di chuyển OSRM.')
-    parser.add_argument('--radius', type=float, default=2000.0, help='Bán kính lọc sơ bộ (m) bằng Haversine.') # Đã đổi từ mét sang km
+    parser.add_argument('--radius', type=float, default=10000.0, help='Bán kính lọc sơ bộ (m) bằng Haversine.') # Đã đổi từ mét sang km
     args = parser.parse_args()
     
     # SỬA LỖI: Gọi hàm chuyên biệt
