@@ -366,7 +366,7 @@ def main():
     parser.add_argument('--router-csv', type=str, required=True, help='Đường dẫn file CSV chứa danh sách Router (Name, Lat, Lon, Type, Priority, Site ID).') 
     parser.add_argument('--output-file', type=str, default='routing_results.xlsx', help='Tên file EXCEL (.xlsx) kết quả đầu ra.') 
     parser.add_argument('--profile', type=str, default='car', help='Chế độ di chuyển OSRM.')
-    parser.add_argument('--radius', type=float, default=10.0, help='Bán kính lọc sơ bộ (km) bằng Haversine.')
+    parser.add_argument('--radius', type=float, default=10000.0, help='Bán kính lọc sơ bộ (km) bằng Haversine.')
     parser.add_argument('--unique', action='store_true', help='Nếu được bật, sử dụng thuật toán gán lặp theo giải quyết xung đột để đảm bảo mỗi Router chỉ được gán cho một Trạm Mục tiêu duy nhất.') 
     args = parser.parse_args()
     
