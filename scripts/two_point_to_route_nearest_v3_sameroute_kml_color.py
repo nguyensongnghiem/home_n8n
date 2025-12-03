@@ -217,7 +217,7 @@ def generate_kml_description(row_data: Dict[str, Any], match_data: Dict[str, Any
     html = ["<![CDATA[<table border='1' cellpadding='3' style='font-family: Arial, sans-serif; font-size: 10pt;'>"]
     
     # Dữ liệu gốc từ CSV
-    html.append(f"<tr><th colspan='2' style='background-color:#ADD8E6; text-align: left;'>Dữ liệu đầu vào ({len(original_fields)} cột)</th></tr>")
+    html.append(f"<tr><th colspan='2' style='background-color:#B54848; text-align: left;'>Dữ liệu đầu vào ({len(original_fields)} cột)</th></tr>")
     for field in original_fields:
         html.append(f"<tr><td style='font-weight: bold;'>{field}</td><td>{row_data.get(field, 'N/A')}</td></tr>")
 
